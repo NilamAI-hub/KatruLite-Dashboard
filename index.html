@@ -4,14 +4,19 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>KatrU Lite | Enterprise Environmental Monitoring Dashboard</title>
+<title>KatrU Lite | AI Environmental Monitoring Platform</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 <link rel="stylesheet" href="style.css">
 
@@ -21,213 +26,122 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 
 <body>
 
-<!-- ========================= -->
-<!-- SIDEBAR -->
-<!-- ========================= -->
+<!-- =======================================================
+TOP NAVIGATION
+======================================================== -->
 
-<aside class="sidebar">
+<header class="top-nav">
 
-<div class="logo">
+<div class="brand">
 
-<img src="assets/logo.png" class="logo-img">
-
-<h2>KatrU Lite</h2>
-
-<p>AI + IoT Environmental Monitoring</p>
-
-</div>
-
-<ul class="menu">
-
-<li class="active">
-
-<i class="fa-solid fa-chart-line"></i>
-
-Dashboard
-
-</li>
-
-<li>
-
-<i class="fa-solid fa-building"></i>
-
-Facilities
-
-</li>
-
-<li>
-
-<i class="fa-solid fa-microchip"></i>
-
-Devices
-
-</li>
-
-<li>
-
-<i class="fa-solid fa-triangle-exclamation"></i>
-
-Alerts
-
-</li>
-
-<li>
-
-<i class="fa-solid fa-chart-column"></i>
-
-Analytics
-
-</li>
-
-<li>
-
-<i class="fa-solid fa-file-export"></i>
-
-Reports
-
-</li>
-
-<li>
-
-<i class="fa-solid fa-gear"></i>
-
-Settings
-
-</li>
-
-</ul>
-
-<div class="sidebar-footer">
-
-TRL-4 Prototype
-
-</div>
-
-</aside>
-
-<!-- ========================= -->
-<!-- MAIN -->
-<!-- ========================= -->
-
-<main class="main">
-
-<header class="topbar">
+<img src="assets/logo.png" alt="KatrU Lite">
 
 <div>
 
-<h1>
+<h2>KatrU Lite</h2>
 
-Enterprise Monitoring Dashboard
-
-</h1>
-
-<p>
-
-AI Powered Environmental Intelligence Platform
-
-</p>
+<p>AI + IoT Environmental Monitoring Platform</p>
 
 </div>
 
-<div class="status-bar">
+</div>
 
-<div class="online">
+<div class="nav-right">
 
-<span class="dot"></span>
+<div class="sync">
+
+<i class="fa-solid fa-clock"></i>
+
+<span id="clock">
+
+10:30 AM
+
+</span>
+
+</div>
+
+<div class="status">
+
+<span class="live-dot"></span>
 
 ONLINE
 
 </div>
 
-<div id="clock">
+<button class="refresh">
 
-09 Aug 2026 | 10:30 AM
+<i class="fa-solid fa-rotate"></i>
 
-</div>
+Refresh
+
+</button>
 
 </div>
 
 </header>
 
-<!-- ========================= -->
-<!-- FACILITY SELECTION -->
-<!-- ========================= -->
+<!-- =======================================================
+HERO SECTION
+======================================================== -->
 
-<section class="facility-section">
+<section class="hero">
 
-<h2>
+<div class="hero-left">
 
-Select Monitoring Facility
+<h1>
 
-</h2>
+Healthy Environment.
+
+<br>
+
+Smarter Decisions.
+
+</h1>
 
 <p>
 
-Choose the monitoring environment.
+AI-powered environmental monitoring platform designed for public toilets,
+community sanitation, industries, hospitals and educational institutions.
 
 </p>
 
-<div class="facility-grid">
+<div class="hero-buttons">
 
-<div class="facility active" data-type="toilet">
+<button id="startDemo">
 
-<img src="assets/toilet.png">
+<i class="fa-solid fa-play"></i>
 
-<h3>Public Toilet</h3>
+Start Live Demo
 
-</div>
+</button>
 
-<div class="facility" data-type="factory">
+<button id="viewReport">
 
-<img src="assets/factory.png">
+<i class="fa-solid fa-chart-column"></i>
 
-<h3>Industrial Factory</h3>
+Analytics
 
-</div>
-
-<div class="facility" data-type="community">
-
-<img src="assets/community.png">
-
-<h3>Community Toilet</h3>
+</button>
 
 </div>
 
-<div class="facility" data-type="school">
-
-<img src="assets/school.png">
-
-<h3>School</h3>
-
 </div>
 
-<div class="facility" data-type="hospital">
+<div class="hero-right">
 
-<img src="assets/hospital.png">
-
-<h3>Hospital</h3>
-
-</div>
-
-<div class="facility" data-type="stp">
-
-<img src="assets/stp.png">
-
-<h3>STP</h3>
-
-</div>
+<img src="assets/katru-device.png" alt="KatrU Lite Device">
 
 </div>
 
 </section>
 
-<!-- ========================= -->
-<!-- DASHBOARD SUMMARY -->
-<!-- ========================= -->
+<!-- =======================================================
+SYSTEM STATUS
+======================================================== -->
 
-<section class="summary">
+<section class="system-overview">
 
-<div class="summary-card">
+<div class="overview-card">
 
 <h4>
 
@@ -235,11 +149,11 @@ Environmental Health
 
 </h4>
 
-<h2 id="health">
+<h1 id="healthScore">
 
-95%
+96%
 
-</h2>
+</h1>
 
 <p>
 
@@ -249,7 +163,7 @@ Excellent
 
 </div>
 
-<div class="summary-card">
+<div class="overview-card">
 
 <h4>
 
@@ -257,55 +171,55 @@ AI Risk Score
 
 </h4>
 
-<h2 id="risk">
+<h1 id="riskScore">
 
 LOW
 
-</h2>
+</h1>
 
 <p>
 
-Normal
+No Immediate Risk
 
 </p>
 
 </div>
 
-<div class="summary-card">
+<div class="overview-card">
 
 <h4>
 
-Device Status
+Air Quality
 
 </h4>
 
-<h2>
+<h1 id="aqi">
 
-ONLINE
+GOOD
 
-</h2>
+</h1>
 
 <p>
 
-KatrU Lite-001
+AQI 42
 
 </p>
 
 </div>
 
-<div class="summary-card">
+<div class="overview-card">
 
 <h4>
 
-Today's Alerts
+Alerts
 
 </h4>
 
-<h2>
+<h1 id="alerts">
 
-2
+02
 
-</h2>
+</h1>
 
 <p>
 
@@ -315,205 +229,597 @@ Warning
 
 </div>
 
-</section>
-
-<!-- ========================= -->
-<!-- SENSOR CARDS -->
-<!-- ========================= -->
-
-<section class="sensor-grid">
-
-<div class="sensor-card">
-
-<h4>CO₂</h4>
-
-<h1 id="co2">
-
-530
-
-</h1>
-
-<p>ppm</p>
-
-</div>
-
-<div class="sensor-card">
-
-<h4>NH₃</h4>
-
-<h1 id="nh3">
-
-12
-
-</h1>
-
-<p>ppm</p>
-
-</div>
-
-<div class="sensor-card">
-
-<h4>H₂S</h4>
-
-<h1 id="h2s">
-
-3
-
-</h1>
-
-<p>ppm</p>
-
-</div>
-
-<div class="sensor-card">
-
-<h4>TVOC</h4>
-
-<h1 id="tvoc">
-
-210
-
-</h1>
-
-<p>ppb</p>
-
-</div>
-
-<div class="sensor-card">
-
-<h4>PM2.5</h4>
-
-<h1 id="pm25">
-
-18
-
-</h1>
-
-<p>µg/m³</p>
-
-</div>
-
-<div class="sensor-card">
-
-<h4>Temperature</h4>
-
-<h1 id="temp">
-
-29°C
-
-</h1>
-
-</div>
-
-<div class="sensor-card">
-
-<h4>Humidity</h4>
-
-<h1 id="humidity">
-
-65%
-
-</h1>
-
-</div>
-
-<div class="sensor-card ai">
+<div class="overview-card">
 
 <h4>
 
-AI Status
+Connected Devices
 
 </h4>
 
 <h1>
 
-SAFE
+01
 
 </h1>
 
-</div>
+<p>
 
-</section>
+KATRU-001
 
-<!-- ========================= -->
-<!-- LIVE ANALYTICS -->
-<!-- ========================= -->
-
-<section class="dashboard-row">
-
-<div class="chart-card">
-
-<div class="card-header">
-
-<h3>
-
-<i class="fa-solid fa-chart-line"></i>
-
-Live Sensor Trend
-
-</h3>
-
-<select id="chartRange">
-
-<option>Last 1 Hour</option>
-
-<option>Last 24 Hours</option>
-
-<option>Last 7 Days</option>
-
-<option>Last 30 Days</option>
-
-</select>
-
-</div>
-
-<canvas id="sensorChart"></canvas>
-
-</div>
-
-<div class="chart-card">
-
-<div class="card-header">
-
-<h3>
-
-<i class="fa-solid fa-chart-pie"></i>
-
-Air Quality Index
-
-</h3>
-
-</div>
-
-<canvas id="aqiChart"></canvas>
+</p>
 
 </div>
 
 </section>
 
-<!-- ========================= -->
-<!-- THRESHOLD SETTINGS -->
-<!-- ========================= -->
+<!-- =======================================================
+FACILITY SELECTION
+======================================================== -->
 
-<section class="threshold-section">
+<section class="facility-section">
 
-<div class="threshold-card">
+<div class="section-title">
 
 <h2>
 
-<i class="fa-solid fa-sliders"></i>
-
-Threshold Settings
+Monitoring Facility
 
 </h2>
 
 <p>
 
-Modify environmental limits for the selected facility.
+Select the deployment environment.
 
 </p>
 
+</div>
+
+<div class="facility-grid">
+
+<div class="facility active"
+
+data-type="toilet">
+
+<img src="assets/toilet.png">
+
+<h3>
+
+Public Toilet
+
+</h3>
+
+</div>
+
+<div class="facility"
+
+data-type="community">
+
+<img src="assets/community.png">
+
+<h3>
+
+Community Toilet
+
+</h3>
+
+</div>
+
+<div class="facility"
+
+data-type="factory">
+
+<img src="assets/factory.png">
+
+<h3>
+
+Industrial Factory
+
+</h3>
+
+</div>
+
+<div class="facility"
+
+data-type="school">
+
+<img src="assets/school.png">
+
+<h3>
+
+School
+
+</h3>
+
+</div>
+
+<div class="facility"
+
+data-type="hospital">
+
+<img src="assets/hospital.png">
+
+<h3>
+
+Hospital
+
+</h3>
+
+</div>
+
+<div class="facility"
+
+data-type="stp">
+
+<img src="assets/stp.png">
+
+<h3>
+
+STP
+
+</h3>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =======================================================
+DEMO CONTROLS
+======================================================== -->
+
+<section class="demo-controls">
+
+<button class="normal">
+
+🟢 Normal
+
+</button>
+
+<button class="warning">
+
+🟡 Warning
+
+</button>
+
+<button class="critical">
+
+🔴 Critical
+
+</button>
+
+<button class="custom">
+
+⚙ Custom
+
+</button>
+
+<button class="demo">
+
+▶ Auto Demo
+
+</button>
+
+</section>
+
+<!-- =======================================================
+LIVE SENSOR MONITORING
+======================================================== -->
+
+<section class="sensor-dashboard">
+
+<div class="section-title">
+
+<h2>
+
+<i class="fa-solid fa-wave-square"></i>
+
+Live Environmental Parameters
+
+</h2>
+
+<p>
+
+Real-time monitoring of environmental conditions.
+
+</p>
+
+</div>
+
+<div class="sensor-grid">
+
+<div class="sensor-card green" id="card-co2">
+
+<div class="sensor-icon">
+
+<i class="fa-solid fa-cloud"></i>
+
+</div>
+
+<h5>CO₂</h5>
+
+<h1 id="co2Value">520</h1>
+
+<p>ppm</p>
+
+<span class="status">Normal</span>
+
+</div>
+
+<div class="sensor-card green" id="card-nh3">
+
+<div class="sensor-icon">
+
+<i class="fa-solid fa-flask"></i>
+
+</div>
+
+<h5>NH₃</h5>
+
+<h1 id="nh3Value">12</h1>
+
+<p>ppm</p>
+
+<span class="status">Normal</span>
+
+</div>
+
+<div class="sensor-card green" id="card-h2s">
+
+<div class="sensor-icon">
+
+<i class="fa-solid fa-smog"></i>
+
+</div>
+
+<h5>H₂S</h5>
+
+<h1 id="h2sValue">2</h1>
+
+<p>ppm</p>
+
+<span class="status">Normal</span>
+
+</div>
+
+<div class="sensor-card green" id="card-tvoc">
+
+<div class="sensor-icon">
+
+<i class="fa-solid fa-wind"></i>
+
+</div>
+
+<h5>TVOC</h5>
+
+<h1 id="tvocValue">210</h1>
+
+<p>ppb</p>
+
+<span class="status">Normal</span>
+
+</div>
+
+<div class="sensor-card green" id="card-pm">
+
+<div class="sensor-icon">
+
+<i class="fa-solid fa-fan"></i>
+
+</div>
+
+<h5>PM2.5</h5>
+
+<h1 id="pmValue">18</h1>
+
+<p>µg/m³</p>
+
+<span class="status">Healthy</span>
+
+</div>
+
+<div class="sensor-card green" id="card-temp">
+
+<div class="sensor-icon">
+
+<i class="fa-solid fa-temperature-half"></i>
+
+</div>
+
+<h5>Temperature</h5>
+
+<h1 id="tempValue">29°C</h1>
+
+<p>Ambient</p>
+
+<span class="status">Normal</span>
+
+</div>
+
+<div class="sensor-card green" id="card-humidity">
+
+<div class="sensor-icon">
+
+<i class="fa-solid fa-droplet"></i>
+
+</div>
+
+<h5>Humidity</h5>
+
+<h1 id="humidityValue">64%</h1>
+
+<p>Relative</p>
+
+<span class="status">Optimal</span>
+
+</div>
+
+<div class="sensor-card blue" id="card-ai">
+
+<div class="sensor-icon">
+
+<i class="fa-solid fa-brain"></i>
+
+</div>
+
+<h5>AI Prediction</h5>
+
+<h1 id="predictionValue">
+
+SAFE
+
+</h1>
+
+<p>
+
+Confidence
+
+</p>
+
+<span class="status">
+
+96%
+
+</span>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =======================================================
+GAUGE SECTION
+======================================================== -->
+
+<section class="gauge-section">
+
+<div class="gauge-card">
+
+<h3>
+
+CO₂ Level
+
+</h3>
+
+<canvas id="co2Gauge"></canvas>
+
+</div>
+
+<div class="gauge-card">
+
+<h3>
+
+NH₃ Level
+
+</h3>
+
+<canvas id="nh3Gauge"></canvas>
+
+</div>
+
+<div class="gauge-card">
+
+<h3>
+
+H₂S Level
+
+</h3>
+
+<canvas id="h2sGauge"></canvas>
+
+</div>
+
+<div class="gauge-card">
+
+<h3>
+
+Overall AQI
+
+</h3>
+
+<canvas id="aqiGauge"></canvas>
+
+</div>
+
+</section>
+
+<!-- =======================================================
+LIVE ANALYTICS
+======================================================== -->
+
+<section class="analytics-row">
+
+<div class="chart-panel">
+
+<div class="panel-header">
+
+<h2>
+
+Live Trend Analysis
+
+</h2>
+
+<select id="chartFilter">
+
+<option>
+
+Last Hour
+
+</option>
+
+<option>
+
+Today
+
+</option>
+
+<option>
+
+This Week
+
+</option>
+
+<option>
+
+This Month
+
+</option>
+
+</select>
+
+</div>
+
+<canvas id="trendChart"></canvas>
+
+</div>
+
+<div class="analytics-panel">
+
+<h2>
+
+Environmental Summary
+
+</h2>
+
+<div class="summary-list">
+
+<div class="summary-item">
+
+<span>
+
+Air Quality
+
+</span>
+
+<b id="aqiStatus">
+
+Excellent
+
+</b>
+
+</div>
+
+<div class="summary-item">
+
+<span>
+
+Health Score
+
+</span>
+
+<b id="healthStatus">
+
+96%
+
+</b>
+
+</div>
+
+<div class="summary-item">
+
+<span>
+
+Risk Level
+
+</span>
+
+<b id="riskStatus">
+
+LOW
+
+</b>
+
+</div>
+
+<div class="summary-item">
+
+<span>
+
+Active Alerts
+
+</span>
+
+<b id="alertCount">
+
+2
+
+</b>
+
+</div>
+
+<div class="summary-item">
+
+<span>
+
+Monitoring Status
+
+</span>
+
+<b class="online">
+
+ACTIVE
+
+</b>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =======================================================
+THRESHOLD CONFIGURATION
+======================================================== -->
+
+<section class="config-row">
+
+<div class="threshold-panel">
+
+<div class="panel-header">
+
+<h2>
+
+<i class="fa-solid fa-sliders"></i>
+
+Threshold Configuration
+
+</h2>
+
+<p>
+
+Configure warning and critical limits for each sensor.
+
+</p>
+
+</div>
+
 <table class="threshold-table">
+
+<thead>
 
 <tr>
 
@@ -525,9 +831,13 @@ Modify environmental limits for the selected facility.
 
 </tr>
 
+</thead>
+
+<tbody>
+
 <tr>
 
-<td>CO₂</td>
+<td>CO₂ (ppm)</td>
 
 <td><input type="number" id="co2Warn" value="800"></td>
 
@@ -537,7 +847,7 @@ Modify environmental limits for the selected facility.
 
 <tr>
 
-<td>NH₃</td>
+<td>NH₃ (ppm)</td>
 
 <td><input type="number" id="nh3Warn" value="25"></td>
 
@@ -547,7 +857,7 @@ Modify environmental limits for the selected facility.
 
 <tr>
 
-<td>H₂S</td>
+<td>H₂S (ppm)</td>
 
 <td><input type="number" id="h2sWarn" value="5"></td>
 
@@ -557,7 +867,7 @@ Modify environmental limits for the selected facility.
 
 <tr>
 
-<td>TVOC</td>
+<td>TVOC (ppb)</td>
 
 <td><input type="number" id="tvocWarn" value="300"></td>
 
@@ -567,7 +877,7 @@ Modify environmental limits for the selected facility.
 
 <tr>
 
-<td>PM2.5</td>
+<td>PM2.5 (µg/m³)</td>
 
 <td><input type="number" id="pmWarn" value="35"></td>
 
@@ -575,17 +885,43 @@ Modify environmental limits for the selected facility.
 
 </tr>
 
+<tr>
+
+<td>Temperature (°C)</td>
+
+<td><input type="number" id="tempWarn" value="35"></td>
+
+<td><input type="number" id="tempCritical" value="40"></td>
+
+</tr>
+
+<tr>
+
+<td>Humidity (%)</td>
+
+<td><input type="number" id="humWarn" value="75"></td>
+
+<td><input type="number" id="humCritical" value="90"></td>
+
+</tr>
+
+</tbody>
+
 </table>
 
-<div class="button-group">
+<div class="config-buttons">
 
-<button id="applyThreshold">
+<button id="applySettings">
+
+<i class="fa-solid fa-check"></i>
 
 Apply Settings
 
 </button>
 
-<button id="resetThreshold">
+<button id="resetSettings">
+
+<i class="fa-solid fa-rotate-left"></i>
 
 Reset
 
@@ -595,61 +931,127 @@ Reset
 
 </div>
 
-<!-- ========================= -->
-<!-- AI RECOMMENDATION -->
-<!-- ========================= -->
+<!-- =======================================================
+AI RECOMMENDATION PANEL
+======================================================== -->
 
 <div class="ai-panel">
+
+<div class="panel-header">
 
 <h2>
 
 <i class="fa-solid fa-robot"></i>
 
-AI Recommendation
+AI Recommendation Engine
 
 </h2>
 
-<div id="aiBox">
+</div>
 
-<h3>
+<div class="ai-score">
 
-Current Status
+<h1 id="aiScore">
 
-</h3>
+96%
+
+</h1>
 
 <p>
 
-Environmental conditions are within acceptable limits.
+AI Confidence Score
 
 </p>
 
-<ul>
+</div>
 
-<li>
+<div class="recommendation-box">
 
-✔ Continue routine monitoring.
+<h3>
 
-</li>
+Current Assessment
 
-<li>
+</h3>
 
-✔ Ventilation operating normally.
+<p id="assessment">
 
-</li>
+All monitored environmental parameters are within acceptable operating limits.
 
-<li>
+</p>
 
-✔ No immediate action required.
+</div>
 
-</li>
+<div class="recommendation-list">
 
-<li>
+<div class="recommend-item">
 
-✔ Next inspection after 2 hours.
+<i class="fa-solid fa-circle-check"></i>
 
-</li>
+<span id="rec1">
 
-</ul>
+Continue routine monitoring.
+
+</span>
+
+</div>
+
+<div class="recommend-item">
+
+<i class="fa-solid fa-circle-check"></i>
+
+<span id="rec2">
+
+Ventilation system operating efficiently.
+
+</span>
+
+</div>
+
+<div class="recommend-item">
+
+<i class="fa-solid fa-circle-check"></i>
+
+<span id="rec3">
+
+No maintenance action required.
+
+</span>
+
+</div>
+
+<div class="recommend-item">
+
+<i class="fa-solid fa-circle-check"></i>
+
+<span id="rec4">
+
+Next inspection recommended after 2 hours.
+
+</span>
+
+</div>
+
+</div>
+
+<div class="prediction-card">
+
+<h4>
+
+Prediction
+
+</h4>
+
+<h2 id="predictionText">
+
+LOW RISK
+
+</h2>
+
+<p>
+
+Based on current sensor trends, no hazardous environmental condition is predicted within the next 30 minutes.
+
+</p>
 
 </div>
 
@@ -657,15 +1059,143 @@ Environmental conditions are within acceptable limits.
 
 </section>
 
-<!-- ========================= -->
-<!-- SMS PREVIEW -->
-<!-- ========================= -->
+<!-- =======================================================
+HEALTH INDEX PANEL
+======================================================== -->
 
-<section class="sms-section">
+<section class="health-row">
 
-<div class="sms-card">
+<div class="health-card">
 
-<div class="card-header">
+<h3>
+
+Environmental Health Index
+
+</h3>
+
+<div class="health-bar">
+
+<div id="healthFill">
+
+96%
+
+</div>
+
+</div>
+
+<p>
+
+Current environmental quality is within the optimal operating range.
+
+</p>
+
+</div>
+
+<div class="health-card">
+
+<h3>
+
+System Performance
+
+</h3>
+
+<table class="performance-table">
+
+<tr>
+
+<td>
+
+Device Uptime
+
+</td>
+
+<td>
+
+99.9%
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Sensor Availability
+
+</td>
+
+<td>
+
+100%
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+AI Prediction Accuracy
+
+</td>
+
+<td>
+
+96%
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Communication
+
+</td>
+
+<td>
+
+Stable
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Data Refresh
+
+</td>
+
+<td>
+
+Every 2 Seconds
+
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+</section>
+
+<!-- =======================================================
+SMS / EMAIL ALERT CENTER
+======================================================== -->
+
+<section class="communication-row">
+
+<div class="sms-panel">
+
+<div class="panel-header">
 
 <h2>
 
@@ -675,50 +1205,153 @@ SMS Alert Preview
 
 </h2>
 
-<button id="sendSMS">
+</div>
 
-Preview SMS
+<div class="message-box">
+
+<label>Recipient</label>
+
+<input type="text" value="Municipality Health Officer" readonly>
+
+<label>Facility</label>
+
+<input type="text" id="facilityName" value="Public Toilet" readonly>
+
+<label>Priority</label>
+
+<input type="text" id="priority" value="Normal" readonly>
+
+<label>Generated Message</label>
+
+<textarea id="smsMessage" rows="9">
+
+KatrU Lite Environmental Alert
+
+Facility : Public Toilet
+
+CO₂ : 520 ppm
+
+NH₃ : 12 ppm
+
+H₂S : 2 ppm
+
+Status : NORMAL
+
+Recommendation :
+
+No action required.
+
+Generated by
+
+KatrU Lite AI Monitoring Platform
+
+</textarea>
+
+<div class="action-buttons">
+
+<button id="previewSMS">
+
+<i class="fa-solid fa-eye"></i>
+
+Preview
+
+</button>
+
+<button id="copySMS">
+
+<i class="fa-solid fa-copy"></i>
+
+Copy
+
+</button>
+
+<button id="downloadSMS">
+
+<i class="fa-solid fa-download"></i>
+
+Download
 
 </button>
 
 </div>
 
-<div class="sms-box">
+</div>
 
-<b>To</b>
+</div>
 
-Municipality Health Officer
+<!-- =======================================================
+EMAIL PREVIEW
+======================================================== -->
 
-<br><br>
+<div class="email-panel">
 
-<b>Facility</b>
+<div class="panel-header">
 
-<span id="facilityName">
+<h2>
 
-Public Toilet
+<i class="fa-solid fa-envelope"></i>
 
-</span>
+Email Notification
 
-<br><br>
+</h2>
 
-<b>Status</b>
+</div>
 
-<span id="statusText">
+<div class="message-box">
+
+<label>To</label>
+
+<input type="email"
+
+value="officer@municipality.gov"
+
+readonly>
+
+<label>Subject</label>
+
+<input type="text"
+
+value="KatrU Lite Environmental Monitoring Alert"
+
+readonly>
+
+<label>Email Preview</label>
+
+<textarea rows="9" readonly>
+
+Dear Officer,
+
+The KatrU Lite monitoring system has analysed the environmental conditions.
+
+Current Status :
 
 NORMAL
 
-</span>
+Facility :
 
-<br><br>
+Public Toilet
 
-<b>Message</b>
+AI Assessment :
 
-<p id="smsMessage">
+Environment is safe.
 
-KatrU Lite Update:
-All monitored environmental parameters are within the configured safe operating limits. No action is currently required.
+Recommendation :
 
-</p>
+Continue regular monitoring.
+
+Regards,
+
+KatrU Lite AI Platform
+
+</textarea>
+
+<button>
+
+<i class="fa-solid fa-paper-plane"></i>
+
+Preview Email
+
+</button>
 
 </div>
 
@@ -726,22 +1359,19 @@ All monitored environmental parameters are within the configured safe operating 
 
 </section>
 
-<!-- ========================= -->
-<!-- ========================= -->
-<!-- ALERT HISTORY -->
-<!-- ========================= -->
+<!-- =======================================================
+RECENT ALERTS
+======================================================== -->
 
-<section class="dashboard-row">
+<section class="alerts-section">
 
-<div class="alerts-card">
-
-<div class="card-header">
+<div class="panel-header">
 
 <h2>
 
-<i class="fa-solid fa-triangle-exclamation"></i>
+<i class="fa-solid fa-bell"></i>
 
-Recent Alerts
+Recent Alerts Timeline
 
 </h2>
 
@@ -755,13 +1385,15 @@ Recent Alerts
 
 <th>Time</th>
 
+<th>Facility</th>
+
 <th>Sensor</th>
 
-<th>Value</th>
+<th>Reading</th>
 
 <th>Status</th>
 
-<th>Recommendation</th>
+<th>AI Recommendation</th>
 
 </tr>
 
@@ -771,15 +1403,21 @@ Recent Alerts
 
 <tr>
 
-<td>09:45 AM</td>
+<td>10:15 AM</td>
+
+<td>Public Toilet</td>
 
 <td>CO₂</td>
 
-<td>965 ppm</td>
+<td>820 ppm</td>
 
-<td class="warning">
+<td>
+
+<span class="warning-badge">
 
 Warning
+
+</span>
 
 </td>
 
@@ -793,15 +1431,21 @@ Increase Ventilation
 
 <tr>
 
-<td>10:10 AM</td>
+<td>10:28 AM</td>
+
+<td>Factory</td>
 
 <td>NH₃</td>
 
-<td>52 ppm</td>
+<td>42 ppm</td>
 
-<td class="critical">
+<td>
+
+<span class="critical-badge">
 
 Critical
+
+</span>
 
 </td>
 
@@ -815,21 +1459,27 @@ Immediate Inspection
 
 <tr>
 
-<td>10:25 AM</td>
+<td>10:42 AM</td>
+
+<td>School</td>
 
 <td>PM2.5</td>
 
-<td>45 μg/m³</td>
+<td>18 μg/m³</td>
 
-<td class="warning">
+<td>
 
-Warning
+<span class="normal-badge">
+
+Normal
+
+</span>
 
 </td>
 
 <td>
 
-Check Air Filter
+Continue Monitoring
 
 </td>
 
@@ -839,19 +1489,27 @@ Check Air Filter
 
 </table>
 
-</div>
+</section>
 
-<!-- ========================= -->
-<!-- DEVICE STATUS -->
-<!-- ========================= -->
+<!-- =======================================================
+DEVICE INFORMATION
+======================================================== -->
+
+<section class="device-section">
 
 <div class="device-card">
 
+<img src="assets/katru-device.png"
+
+class="device-image">
+
+</div>
+
+<div class="device-info">
+
 <h2>
 
-<i class="fa-solid fa-microchip"></i>
-
-Device Information
+KatrU Lite Device Information
 
 </h2>
 
@@ -877,13 +1535,29 @@ KATRU-001
 
 <td>
 
+PCB Version
+
+</td>
+
+<td>
+
+Rev A Prototype
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
 Firmware
 
 </td>
 
 <td>
 
-Version 1.0.0
+v1.0.0
 
 </td>
 
@@ -893,39 +1567,7 @@ Version 1.0.0
 
 <td>
 
-PCB
-
-</td>
-
-<td>
-
-Custom PCB Rev A
-
-</td>
-
-</tr>
-
-<tr>
-
-<td>
-
-Communication
-
-</td>
-
-<td>
-
-Wi-Fi Connected
-
-</td>
-
-</tr>
-
-<tr>
-
-<td>
-
-Power
+Power Supply
 
 </td>
 
@@ -941,13 +1583,13 @@ Power
 
 <td>
 
-Signal
+Connectivity
 
 </td>
 
 <td>
 
-Excellent
+Wi-Fi
 
 </td>
 
@@ -957,11 +1599,27 @@ Excellent
 
 <td>
 
-Last Sync
+Cloud Sync
 
 </td>
 
-<td id="syncTime">
+<td>
+
+Connected
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Last Update
+
+</td>
+
+<td id="lastSync">
 
 2 Seconds Ago
 
@@ -973,13 +1631,13 @@ Last Sync
 
 <td>
 
-Location
+GPS Location
 
 </td>
 
-<td id="deviceLocation">
+<td>
 
-Public Toilet
+Cuddalore, Tamil Nadu
 
 </td>
 
@@ -991,39 +1649,43 @@ Public Toilet
 
 </section>
 
-<!-- ========================= -->
-<!-- REPORTS -->
-<!-- ========================= -->
+<!-- =======================================================
+REPORTS & ANALYTICS
+======================================================== -->
 
 <section class="report-section">
 
-<div class="report-card">
+<div class="panel-header">
 
 <h2>
 
 <i class="fa-solid fa-chart-column"></i>
 
-Analysis Reports
+Reports & Analytics
 
 </h2>
 
+</div>
+
 <div class="report-grid">
 
-<div class="report-box">
+<div class="report-card">
+
+<i class="fa-solid fa-file-pdf"></i>
 
 <h3>
 
-Today's Report
+Environmental Report
 
 </h3>
 
 <p>
 
-Sensor summary and alerts.
+Generate a complete environmental monitoring report.
 
 </p>
 
-<button>
+<button id="pdfReport">
 
 Generate PDF
 
@@ -1031,43 +1693,23 @@ Generate PDF
 
 </div>
 
-<div class="report-box">
+<div class="report-card">
+
+<i class="fa-solid fa-file-excel"></i>
 
 <h3>
 
-Weekly Report
+Sensor Data
 
 </h3>
 
 <p>
 
-Environmental trend analysis.
+Download historical sensor readings.
 
 </p>
 
-<button>
-
-Export PDF
-
-</button>
-
-</div>
-
-<div class="report-box">
-
-<h3>
-
-Monthly Report
-
-</h3>
-
-<p>
-
-Performance dashboard.
-
-</p>
-
-<button>
+<button id="excelReport">
 
 Export Excel
 
@@ -1075,25 +1717,145 @@ Export Excel
 
 </div>
 
-<div class="report-box">
+<div class="report-card">
+
+<i class="fa-solid fa-file-csv"></i>
 
 <h3>
 
-Raw Sensor Data
+CSV Export
 
 </h3>
 
 <p>
 
-CSV Download
+Export raw environmental measurements.
 
 </p>
 
-<button>
+<button id="csvReport">
 
-Export CSV
+Download CSV
 
 </button>
+
+</div>
+
+<div class="report-card">
+
+<i class="fa-solid fa-chart-pie"></i>
+
+<h3>
+
+Monthly Analytics
+
+</h3>
+
+<p>
+
+Visual environmental trend analysis.
+
+</p>
+
+<button id="analytics">
+
+View Dashboard
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =======================================================
+SYSTEM STATUS
+======================================================== -->
+
+<section class="system-status">
+
+<div class="status-card">
+
+<h3>
+
+CPU Usage
+
+</h3>
+
+<div class="progress">
+
+<div class="progress-fill"
+
+style="width:32%">
+
+32%
+
+</div>
+
+</div>
+
+</div>
+
+<div class="status-card">
+
+<h3>
+
+Memory Usage
+
+</h3>
+
+<div class="progress">
+
+<div class="progress-fill"
+
+style="width:54%">
+
+54%
+
+</div>
+
+</div>
+
+</div>
+
+<div class="status-card">
+
+<h3>
+
+Storage
+
+</h3>
+
+<div class="progress">
+
+<div class="progress-fill"
+
+style="width:22%">
+
+22%
+
+</div>
+
+</div>
+
+</div>
+
+<div class="status-card">
+
+<h3>
+
+Cloud Sync
+
+</h3>
+
+<div class="progress green">
+
+<div class="progress-fill"
+
+style="width:100%">
+
+Connected
 
 </div>
 
@@ -1103,15 +1865,67 @@ Export CSV
 
 </section>
 
-<!-- ========================= -->
-<!-- FOOTER -->
-<!-- ========================= -->
+<!-- =======================================================
+QUICK ACTIONS
+======================================================== -->
+
+<section class="quick-actions">
+
+<button id="refreshDashboard">
+
+<i class="fa-solid fa-rotate"></i>
+
+Refresh Dashboard
+
+</button>
+
+<button id="downloadReport">
+
+<i class="fa-solid fa-download"></i>
+
+Download Report
+
+</button>
+
+<button id="shareDashboard">
+
+<i class="fa-solid fa-share-nodes"></i>
+
+Share Dashboard
+
+</button>
+
+<button id="toggleTheme">
+
+<i class="fa-solid fa-moon"></i>
+
+Dark Mode
+
+</button>
+
+<button id="systemLogs">
+
+<i class="fa-solid fa-terminal"></i>
+
+System Logs
+
+</button>
+
+</section>
+
+<!-- =======================================================
+FOOTER
+======================================================== -->
 
 <footer class="footer">
 
-<div>
+<div class="footer-left">
 
-<img src="assets/logo.png" class="footer-logo">
+<img src="assets/logo.png"
+
+class="footer-logo">
+
+<div>
 
 <h2>
 
@@ -1121,57 +1935,81 @@ KatrU Lite
 
 <p>
 
-AI + IoT Enabled Environmental Monitoring Platform
+AI + IoT Environmental Monitoring Platform
 
 </p>
 
 </div>
 
-<div>
+</div>
 
-<h4>
-
-Current Status
-
-</h4>
+<div class="footer-center">
 
 <p>
 
-TRL-4 Prototype
+<strong>Prototype Status:</strong>
+
+TRL 4
 
 </p>
 
 <p>
 
-Dashboard Prototype Completed
+PCB Designed & Submitted for Fabrication
 
 </p>
 
 <p>
 
-Custom PCB Submitted for Fabrication & Testing
+Dashboard Prototype V2
+
+</p>
+
+<p>
+
+AI Recommendation Engine Enabled
 
 </p>
 
 </div>
 
-<div>
-
-<h4>
-
-Developed By
-
-</h4>
+<div class="footer-right">
 
 <p>
 
-JWorks Innovation Team
+Developed by
+
+<strong>JWorks</strong>
 
 </p>
 
 <p>
 
-solvejworks@gmail.com
+Founder:
+
+Mrs. Jayalakshmi
+
+</p>
+
+<p>
+
+Lead - Technology:
+
+Mr. Joseph Johnson
+
+</p>
+
+<p>
+
+Project Associate:
+
+Mr. Siva Balaji
+
+</p>
+
+<p>
+
+📧 solvejworks@gmail.com
 
 </p>
 
@@ -1180,8 +2018,6 @@ solvejworks@gmail.com
 </footer>
 
 <script src="script.js"></script>
-
-</main>
 
 </body>
 
