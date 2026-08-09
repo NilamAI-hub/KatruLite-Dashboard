@@ -1,48 +1,225 @@
 /*==================================================
-KATRU LITE DASHBOARD V2
-STYLE.CSS - PART 1
-Enterprise Desktop UI
+KATRU LITE DASHBOARD V3
+STYLE.CSS
+PART 1
+Global
+Loader
+Navigation
+Hero
+Desktop Version
 ==================================================*/
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+/*==============================
+GOOGLE FONT
+==============================*/
 
 *{
+
 margin:0;
+
 padding:0;
+
 box-sizing:border-box;
+
 font-family:'Poppins',sans-serif;
-scroll-behavior:smooth;
+
 }
+
+/*==============================
+BODY
+==============================*/
 
 body{
 
-background:#eef3f9;
+background:#F4F8FC;
 
-color:#23364d;
+color:#23364D;
 
 overflow-x:hidden;
 
 }
 
-/*==================================
-CONTAINER
-==================================*/
+/*==============================
+LINKS
+==============================*/
 
-.container{
+a{
 
-width:95%;
+text-decoration:none;
 
-max-width:1800px;
+color:inherit;
+
+}
+
+/*==============================
+BUTTON
+==============================*/
+
+button{
+
+border:none;
+
+outline:none;
+
+cursor:pointer;
+
+font-family:'Poppins',sans-serif;
+
+transition:.35s;
+
+}
+
+button:hover{
+
+transform:translateY(-3px);
+
+}
+
+/*==============================
+IMAGES
+==============================*/
+
+img{
+
+max-width:100%;
+
+display:block;
+
+}
+
+/*==============================
+LOADER
+==============================*/
+
+#loader{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100vh;
+
+background:#ffffff;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+z-index:99999;
+
+}
+
+.loader-content{
+
+text-align:center;
+
+}
+
+.loader-content img{
+
+width:120px;
+
+margin:auto;
+
+margin-bottom:20px;
+
+}
+
+.loader-content h1{
+
+font-size:40px;
+
+font-weight:700;
+
+color:#1565C0;
+
+margin-bottom:10px;
+
+}
+
+.loader-content p{
+
+font-size:16px;
+
+color:#666;
+
+margin-bottom:25px;
+
+}
+
+.loader-bar{
+
+width:320px;
+
+height:12px;
+
+background:#E8EEF5;
+
+border-radius:30px;
+
+overflow:hidden;
 
 margin:auto;
 
 }
 
-/*==================================
+.loader-progress{
+
+width:0%;
+
+height:100%;
+
+background:linear-gradient(90deg,#1565C0,#00C853);
+
+animation:loading 3s linear forwards;
+
+}
+
+@keyframes loading{
+
+0%{
+
+width:0%;
+
+}
+
+100%{
+
+width:100%;
+
+}
+
+}
+
+/*==============================
+NOTIFICATION
+==============================*/
+
+#notificationContainer{
+
+position:fixed;
+
+top:20px;
+
+right:20px;
+
+z-index:9999;
+
+}
+
+/*==============================
 TOP NAVIGATION
-==================================*/
+==============================*/
 
 .top-nav{
+
+width:100%;
 
 height:90px;
 
@@ -56,13 +233,13 @@ align-items:center;
 
 padding:0 50px;
 
-box-shadow:0 5px 25px rgba(0,0,0,.08);
+box-shadow:0 5px 18px rgba(0,0,0,.08);
 
 position:sticky;
 
 top:0;
 
-z-index:1000;
+z-index:999;
 
 }
 
@@ -72,17 +249,15 @@ display:flex;
 
 align-items:center;
 
-gap:18px;
+gap:20px;
 
 }
 
 .brand img{
 
-width:65px;
+width:58px;
 
-height:65px;
-
-object-fit:contain;
+height:58px;
 
 }
 
@@ -92,17 +267,17 @@ font-size:28px;
 
 font-weight:700;
 
-color:#0B4F75;
+color:#1565C0;
 
 }
 
 .brand p{
 
-font-size:13px;
+font-size:14px;
 
 color:#777;
 
-margin-top:3px;
+margin-top:2px;
 
 }
 
@@ -112,21 +287,33 @@ display:flex;
 
 align-items:center;
 
-gap:20px;
+gap:25px;
 
 }
 
 .sync{
 
-padding:10px 20px;
+background:#F5F8FC;
 
-background:#EDF7FF;
+padding:12px 18px;
 
-border-radius:30px;
+border-radius:12px;
 
-font-size:14px;
+font-size:15px;
 
 font-weight:600;
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+}
+
+.sync i{
+
+color:#1565C0;
 
 }
 
@@ -136,123 +323,137 @@ display:flex;
 
 align-items:center;
 
-gap:8px;
-
-padding:10px 20px;
-
-background:#EAFBF1;
-
-border-radius:30px;
+gap:10px;
 
 font-weight:600;
 
-color:#00A65A;
+color:#00B050;
 
 }
 
 .live-dot{
 
-width:10px;
+width:12px;
 
-height:10px;
+height:12px;
 
 background:#00C853;
 
 border-radius:50%;
 
-animation:pulse 1.5s infinite;
+animation:pulse 1s infinite;
+
+}
+
+@keyframes pulse{
+
+0%{
+
+transform:scale(.9);
+
+opacity:.7;
+
+}
+
+50%{
+
+transform:scale(1.3);
+
+opacity:1;
+
+}
+
+100%{
+
+transform:scale(.9);
+
+opacity:.7;
+
+}
 
 }
 
 .refresh{
 
-background:#0B4F75;
+background:#1565C0;
 
-color:#fff;
+color:#ffffff;
 
 padding:12px 24px;
 
-border:none;
-
-border-radius:10px;
-
-cursor:pointer;
+border-radius:12px;
 
 font-size:15px;
 
 font-weight:600;
 
-transition:.3s;
+display:flex;
+
+align-items:center;
+
+gap:10px;
 
 }
 
 .refresh:hover{
 
-background:#1565C0;
-
-transform:translateY(-3px);
+background:#0B4F75;
 
 }
 
-/*==================================
-HERO SECTION
-==================================*/
+/*==============================
+HERO
+==============================*/
 
 .hero{
 
+margin:35px;
+
+background:linear-gradient(135deg,#1565C0,#0B4F75);
+
+border-radius:28px;
+
+padding:70px;
+
 display:grid;
 
-grid-template-columns:55% 45%;
+grid-template-columns:1.4fr .8fr;
 
 align-items:center;
 
-gap:40px;
+gap:60px;
 
-padding:60px;
+color:#ffffff;
 
-margin:30px;
-
-background:linear-gradient(135deg,#0B4F75,#1565C0);
-
-border-radius:25px;
-
-color:white;
-
-overflow:hidden;
-
-position:relative;
+box-shadow:0 20px 45px rgba(21,101,192,.25);
 
 }
 
-.hero::before{
+.hero-tag{
 
-content:"";
+display:inline-block;
 
-position:absolute;
+background:rgba(255,255,255,.18);
 
-right:-100px;
+padding:10px 18px;
 
-top:-100px;
+border-radius:30px;
 
-width:350px;
+font-size:14px;
 
-height:350px;
-
-background:rgba(255,255,255,.08);
-
-border-radius:50%;
+margin-bottom:25px;
 
 }
 
 .hero h1{
 
-font-size:52px;
+font-size:56px;
 
 font-weight:800;
 
-line-height:65px;
+line-height:70px;
 
-margin-bottom:20px;
+margin-bottom:25px;
 
 }
 
@@ -260,39 +461,41 @@ margin-bottom:20px;
 
 font-size:18px;
 
-line-height:32px;
+line-height:34px;
 
 opacity:.95;
 
-max-width:700px;
+margin-bottom:35px;
+
+max-width:760px;
 
 }
 
 .hero-buttons{
 
-margin-top:35px;
-
 display:flex;
 
-gap:20px;
+gap:18px;
+
+flex-wrap:wrap;
 
 }
 
 .hero-buttons button{
 
-padding:15px 35px;
-
-border:none;
+padding:16px 28px;
 
 border-radius:12px;
 
-font-size:16px;
+font-size:15px;
 
 font-weight:600;
 
-cursor:pointer;
+display:flex;
 
-transition:.35s;
+align-items:center;
+
+gap:10px;
 
 }
 
@@ -300,29 +503,31 @@ transition:.35s;
 
 background:#00C853;
 
-color:#fff;
-
-}
-
-#startDemo:hover{
-
-background:#00A043;
-
-transform:translateY(-4px);
+color:#ffffff;
 
 }
 
 #viewReport{
 
-background:white;
+background:#ffffff;
 
-color:#0B4F75;
+color:#1565C0;
 
 }
 
-#viewReport:hover{
+#presentationMode{
 
-transform:translateY(-4px);
+background:#FF9800;
+
+color:#ffffff;
+
+}
+
+#fullscreen{
+
+background:#212121;
+
+color:#ffffff;
 
 }
 
@@ -332,97 +537,41 @@ display:flex;
 
 justify-content:center;
 
-align-items:center;
-
 }
 
 .hero-right img{
 
-width:420px;
+width:360px;
 
-max-width:100%;
+filter:drop-shadow(0 20px 40px rgba(0,0,0,.35));
 
-animation:float 5s ease-in-out infinite;
-
-filter:drop-shadow(0 20px 30px rgba(0,0,0,.25));
+transition:.4s;
 
 }
 
-/*==================================
-SYSTEM OVERVIEW
-==================================*/
+.hero-right img:hover{
 
-.system-overview{
-
-display:grid;
-
-grid-template-columns:repeat(5,1fr);
-
-gap:25px;
-
-margin:30px;
+transform:scale(1.05);
 
 }
+/*==================================================
+STYLE.CSS V3
+PART 2
+Overview
+Facility Selection
+Demo Controls
+Desktop Version
+==================================================*/
 
-.overview-card{
+/*==============================
+COMMON SECTION
+==============================*/
 
-background:white;
+section{
 
-padding:30px;
-
-border-radius:20px;
-
-box-shadow:0 10px 30px rgba(0,0,0,.08);
-
-transition:.35s;
-
-border-top:5px solid #1565C0;
-
-}
-
-.overview-card:hover{
-
-transform:translateY(-8px);
-
-box-shadow:0 20px 40px rgba(0,0,0,.15);
+margin:35px;
 
 }
-
-.overview-card h4{
-
-font-size:15px;
-
-font-weight:500;
-
-color:#666;
-
-margin-bottom:18px;
-
-}
-
-.overview-card h1{
-
-font-size:38px;
-
-font-weight:700;
-
-color:#0B4F75;
-
-margin-bottom:12px;
-
-}
-
-.overview-card p{
-
-font-size:15px;
-
-color:#777;
-
-}
-
-/*==================================
-SECTION TITLE
-==================================*/
 
 .section-title{
 
@@ -432,17 +581,19 @@ justify-content:space-between;
 
 align-items:center;
 
-margin:40px 30px 25px;
+margin-bottom:30px;
 
 }
 
 .section-title h2{
 
-font-size:32px;
-
-color:#0B4F75;
+font-size:34px;
 
 font-weight:700;
+
+color:#1565C0;
+
+margin-bottom:8px;
 
 }
 
@@ -454,82 +605,157 @@ color:#777;
 
 }
 
-/*==================================
-COMMON BUTTON
-==================================*/
+.section-title i{
 
-button{
+margin-right:10px;
 
-transition:.35s;
+color:#1565C0;
 
 }
 
-button:hover{
-
-transform:translateY(-3px);
-
-}
-
-/*==================================
-ANIMATIONS
-==================================*/
-
-@keyframes pulse{
-
-0%{transform:scale(1);}
-
-50%{transform:scale(1.4);}
-
-100%{transform:scale(1);}
-
-}
-
-@keyframes float{
-
-0%{
-
-transform:translateY(0);
-
-}
-
-50%{
-
-transform:translateY(-12px);
-
-}
-
-100%{
-
-transform:translateY(0);
-
-}
-
-}
-/*==================================================
-STYLE.CSS PART 2
-Facility Selection
-Demo Buttons
-Sensor Cards
-Desktop View
-==================================================*/
-
-/*==================================
-FACILITY SECTION
-==================================*/
-
-.facility-section{
-
-margin:30px;
+.live-time{
 
 background:#fff;
 
-border-radius:22px;
+padding:14px 22px;
 
-padding:35px;
+border-radius:12px;
 
-box-shadow:0 10px 30px rgba(0,0,0,.08);
+font-weight:600;
+
+box-shadow:0 8px 20px rgba(0,0,0,.08);
 
 }
+
+/*==============================
+OVERVIEW GRID
+==============================*/
+
+.overview-grid{
+
+display:grid;
+
+grid-template-columns:repeat(5,1fr);
+
+gap:25px;
+
+}
+
+.overview-card{
+
+background:#fff;
+
+padding:28px;
+
+border-radius:22px;
+
+display:flex;
+
+align-items:center;
+
+gap:20px;
+
+box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+transition:.35s;
+
+cursor:pointer;
+
+}
+
+.overview-card:hover{
+
+transform:translateY(-8px);
+
+box-shadow:0 22px 45px rgba(0,0,0,.16);
+
+}
+
+.overview-icon{
+
+width:72px;
+
+height:72px;
+
+border-radius:18px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:28px;
+
+color:#fff;
+
+}
+
+.green{
+
+background:#00C853;
+
+}
+
+.blue{
+
+background:#1565C0;
+
+}
+
+.orange{
+
+background:#FF9800;
+
+}
+
+.purple{
+
+background:#7B1FA2;
+
+}
+
+.red{
+
+background:#E53935;
+
+}
+
+.overview-card h4{
+
+font-size:15px;
+
+font-weight:600;
+
+color:#777;
+
+margin-bottom:8px;
+
+}
+
+.overview-card h1{
+
+font-size:28px;
+
+font-weight:700;
+
+color:#23364D;
+
+margin-bottom:5px;
+
+}
+
+.overview-card p{
+
+font-size:14px;
+
+color:#888;
+
+}
+
+/*==============================
+FACILITY GRID
+==============================*/
 
 .facility-grid{
 
@@ -539,17 +765,13 @@ grid-template-columns:repeat(6,1fr);
 
 gap:22px;
 
-margin-top:25px;
-
 }
 
 .facility{
 
-background:#F8FBFF;
+background:#fff;
 
-border:2px solid transparent;
-
-border-radius:20px;
+border-radius:22px;
 
 padding:25px;
 
@@ -559,55 +781,87 @@ cursor:pointer;
 
 transition:.35s;
 
+box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+border:3px solid transparent;
+
 }
 
 .facility:hover{
 
 transform:translateY(-8px);
 
-border:2px solid #1565C0;
-
-box-shadow:0 18px 35px rgba(0,0,0,.12);
+box-shadow:0 22px 45px rgba(0,0,0,.16);
 
 }
 
 .facility.active{
 
-background:#E8F4FF;
+border-color:#1565C0;
 
-border:2px solid #1565C0;
+background:#EDF6FF;
 
 }
 
 .facility img{
 
-width:85px;
+width:90px;
 
-height:85px;
+height:90px;
+
+margin:auto;
+
+margin-bottom:18px;
 
 object-fit:contain;
-
-margin-bottom:15px;
 
 }
 
 .facility h3{
 
-font-size:18px;
+font-size:19px;
 
-font-weight:600;
+font-weight:700;
 
-color:#0B4F75;
+color:#23364D;
+
+margin-bottom:8px;
 
 }
 
-/*==================================
+.facility p{
+
+font-size:14px;
+
+color:#777;
+
+}
+
+/*==============================
+FACILITY BADGE
+==============================*/
+
+.facility::after{
+
+content:"Click to Monitor";
+
+display:block;
+
+margin-top:18px;
+
+font-size:13px;
+
+color:#1565C0;
+
+font-weight:600;
+
+}
+
+/*==============================
 DEMO CONTROLS
-==================================*/
+==============================*/
 
 .demo-controls{
-
-margin:30px;
 
 display:flex;
 
@@ -615,69 +869,31 @@ justify-content:center;
 
 align-items:center;
 
-gap:20px;
+gap:18px;
 
 flex-wrap:wrap;
+
+margin-top:40px;
+
+margin-bottom:40px;
 
 }
 
 .demo-controls button{
 
-padding:15px 30px;
+padding:16px 30px;
 
-border:none;
-
-border-radius:12px;
+border-radius:14px;
 
 font-size:15px;
 
 font-weight:600;
 
-cursor:pointer;
+color:#fff;
+
+min-width:170px;
 
 transition:.35s;
-
-box-shadow:0 8px 20px rgba(0,0,0,.12);
-
-}
-
-.normal{
-
-background:#2ECC71;
-
-color:#fff;
-
-}
-
-.warning{
-
-background:#F39C12;
-
-color:#fff;
-
-}
-
-.critical{
-
-background:#E74C3C;
-
-color:#fff;
-
-}
-
-.custom{
-
-background:#1565C0;
-
-color:#fff;
-
-}
-
-.demo{
-
-background:#0B4F75;
-
-color:#fff;
 
 }
 
@@ -687,13 +903,218 @@ transform:translateY(-5px);
 
 }
 
-/*==================================
-SENSOR SECTION
-==================================*/
+.normal{
+
+background:#00C853;
+
+}
+
+.warning{
+
+background:#FF9800;
+
+}
+
+.critical{
+
+background:#E53935;
+
+}
+
+.custom{
+
+background:#1565C0;
+
+}
+
+#autoDemo{
+
+background:#6A1B9A;
+
+}
+
+/*==============================
+STATUS BAR
+==============================*/
+
+.analysis-status,
+
+.live-status,
+
+.ai-status{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+padding:12px 18px;
+
+background:#fff;
+
+border-radius:12px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+font-size:14px;
+
+font-weight:600;
+
+color:#00B050;
+
+}
+
+/*==============================
+SMOOTH ANIMATION
+==============================*/
+
+.overview-card,
+
+.facility,
+
+.demo-controls button{
+
+transition:all .35s ease;
+
+}
+
+/*==============================
+SECTION SPACING
+==============================*/
+
+.overview-section{
+
+margin-top:40px;
+
+}
+
+.facility-section{
+
+margin-top:40px;
+
+}
+
+.demo-controls{
+
+margin-top:35px;
+
+margin-bottom:45px;
+
+}
+/*==================================================
+STYLE.CSS V3
+PART 3
+Manual Sensor Control
+Live Sensor Dashboard
+Desktop Version
+==================================================*/
+
+/*==============================
+SENSOR CONTROL SECTION
+==============================*/
+
+.sensor-control-section{
+
+margin:35px;
+
+}
+
+.sensor-input-grid{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:25px;
+
+margin-top:30px;
+
+}
+
+/*==============================
+INPUT CARD
+==============================*/
+
+.sensor-input-card{
+
+background:#ffffff;
+
+padding:25px;
+
+border-radius:20px;
+
+box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+transition:.35s;
+
+}
+
+.sensor-input-card:hover{
+
+transform:translateY(-6px);
+
+box-shadow:0 20px 45px rgba(0,0,0,.15);
+
+}
+
+.sensor-input-card label{
+
+display:block;
+
+font-size:15px;
+
+font-weight:600;
+
+color:#555;
+
+margin-bottom:12px;
+
+}
+
+.sensor-input-card input{
+
+width:100%;
+
+padding:16px;
+
+font-size:22px;
+
+font-weight:700;
+
+border:2px solid #E4ECF5;
+
+border-radius:12px;
+
+background:#F8FBFF;
+
+outline:none;
+
+transition:.35s;
+
+}
+
+.sensor-input-card input:focus{
+
+border-color:#1565C0;
+
+background:#EDF6FF;
+
+}
+
+.sensor-input-card input:hover{
+
+border-color:#1565C0;
+
+}
+
+/*==============================
+LIVE SENSOR DASHBOARD
+==============================*/
 
 .sensor-dashboard{
 
-margin:30px;
+margin:40px 35px;
 
 }
 
@@ -703,31 +1124,29 @@ display:grid;
 
 grid-template-columns:repeat(4,1fr);
 
-gap:22px;
+gap:25px;
 
 }
 
-/*==================================
+/*==============================
 SENSOR CARD
-==================================*/
+==============================*/
 
 .sensor-card{
 
-background:#fff;
+background:#ffffff;
 
-padding:30px;
+padding:28px;
 
-border-radius:20px;
+border-radius:22px;
 
-text-align:center;
+box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+transition:.35s;
 
 position:relative;
 
 overflow:hidden;
-
-box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-transition:.35s;
 
 }
 
@@ -735,9 +1154,13 @@ transition:.35s;
 
 transform:translateY(-8px);
 
-box-shadow:0 20px 40px rgba(0,0,0,.15);
+box-shadow:0 22px 45px rgba(0,0,0,.15);
 
 }
+
+/*==============================
+TOP BORDER
+==============================*/
 
 .sensor-card::before{
 
@@ -753,9 +1176,13 @@ width:100%;
 
 height:6px;
 
-background:#2ECC71;
+background:#1565C0;
 
 }
+
+/*==============================
+ICON
+==============================*/
 
 .sensor-icon{
 
@@ -763,11 +1190,7 @@ width:70px;
 
 height:70px;
 
-margin:auto;
-
-margin-bottom:18px;
-
-border-radius:50%;
+border-radius:18px;
 
 display:flex;
 
@@ -775,23 +1198,29 @@ justify-content:center;
 
 align-items:center;
 
-background:#EDF7FF;
-
 font-size:30px;
 
-color:#1565C0;
+color:#fff;
+
+margin-bottom:22px;
+
+background:#1565C0;
 
 }
 
+/*==============================
+VALUES
+==============================*/
+
 .sensor-card h5{
 
-font-size:16px;
+font-size:15px;
 
-font-weight:500;
+font-weight:600;
 
-color:#666;
+color:#777;
 
-margin-bottom:12px;
+margin-bottom:10px;
 
 }
 
@@ -799,9 +1228,9 @@ margin-bottom:12px;
 
 font-size:42px;
 
-font-weight:700;
+font-weight:800;
 
-color:#0B4F75;
+color:#23364D;
 
 margin-bottom:10px;
 
@@ -811,11 +1240,15 @@ margin-bottom:10px;
 
 font-size:15px;
 
-color:#777;
+color:#888;
 
-margin-bottom:12px;
+margin-bottom:18px;
 
 }
+
+/*==============================
+STATUS TAG
+==============================*/
 
 .sensor-card span{
 
@@ -823,124 +1256,240 @@ display:inline-block;
 
 padding:8px 18px;
 
-border-radius:25px;
+border-radius:30px;
 
 font-size:13px;
 
-font-weight:600;
+font-weight:700;
+
+color:#fff;
 
 }
 
-/*==================================
-CARD COLORS
-==================================*/
+/*==============================
+SAFE
+==============================*/
 
-.green::before{
+.sensor-card.green::before{
 
-background:#2ECC71;
-
-}
-
-.green span{
-
-background:#EAFBF1;
-
-color:#2ECC71;
+background:#00C853;
 
 }
 
-.yellow::before{
+.sensor-card.green .sensor-icon{
 
-background:#F39C12;
+background:#00C853;
 
 }
 
-.yellow span{
+.sensor-card.green span{
 
-background:#FFF5E7;
+background:#00C853;
+
+}
+
+/*==============================
+WARNING
+==============================*/
+
+.sensor-card.yellow::before{
+
+background:#FF9800;
+
+}
+
+.sensor-card.yellow .sensor-icon{
+
+background:#FF9800;
+
+}
+
+.sensor-card.yellow span{
+
+background:#FF9800;
+
+}
+
+/*==============================
+CRITICAL
+==============================*/
+
+.sensor-card.red::before{
+
+background:#E53935;
+
+}
+
+.sensor-card.red .sensor-icon{
+
+background:#E53935;
+
+}
+
+.sensor-card.red span{
+
+background:#E53935;
+
+animation:blink 1s infinite;
+
+}
+
+/*==============================
+AI CARD
+==============================*/
+
+#aiCard{
+
+background:linear-gradient(135deg,#1565C0,#0B4F75);
+
+color:#ffffff;
+
+}
+
+#aiCard h5,
+
+#aiCard h1,
+
+#aiCard p,
+
+#aiCard span{
+
+color:#ffffff;
+
+}
+
+#aiCard .sensor-icon{
+
+background:rgba(255,255,255,.2);
+
+}
+
+/*==============================
+LIVE STATUS ANIMATION
+==============================*/
+
+@keyframes blink{
+
+0%{
+
+opacity:1;
+
+}
+
+50%{
+
+opacity:.35;
+
+}
+
+100%{
+
+opacity:1;
+
+}
+
+}
+
+/*==============================
+GLOW EFFECTS
+==============================*/
+
+.sensor-card.green{
+
+box-shadow:0 10px 28px rgba(0,200,83,.18);
+
+}
+
+.sensor-card.yellow{
+
+box-shadow:0 10px 28px rgba(255,152,0,.20);
+
+}
+
+.sensor-card.red{
+
+box-shadow:0 10px 28px rgba(229,57,53,.25);
+
+}
+
+/*==============================
+INPUT VALUE COLORS
+==============================*/
+
+#co2Input{
+
+color:#00A651;
+
+}
+
+#nh3Input{
 
 color:#F39C12;
 
 }
 
-.red::before{
+#h2sInput{
 
-background:#E74C3C;
-
-}
-
-.red span{
-
-background:#FDECEC;
-
-color:#E74C3C;
+color:#E53935;
 
 }
 
-.blue::before{
-
-background:#1565C0;
-
-}
-
-.blue span{
-
-background:#EDF7FF;
+#tvocInput{
 
 color:#1565C0;
 
 }
 
-/*==================================
-AI CARD
-==================================*/
+#pmInput{
 
-#card-ai{
-
-background:linear-gradient(135deg,#0B4F75,#1565C0);
-
-color:#fff;
+color:#8E44AD;
 
 }
 
-#card-ai h5,
+#tempInput{
 
-#card-ai h1,
-
-#card-ai p{
-
-color:#fff;
+color:#FF5722;
 
 }
 
-#card-ai span{
+#humidityInput{
 
-background:rgba(255,255,255,.18);
-
-color:#fff;
+color:#0097A7;
 
 }
 
-.sensor-card:hover .sensor-icon{
+#facilityName{
 
-transform:rotate(360deg);
+color:#23364D;
 
-transition:.8s;
+font-size:18px;
 
 }
 /*==================================================
-STYLE.CSS PART 3
-Gauges
-Charts
+STYLE.CSS V3
+PART 4
 Analytics
-Desktop Enterprise UI
+Gauge Cards
+Charts
+Threshold Table
+Desktop Version
 ==================================================*/
 
-/*==================================
-GAUGE SECTION
-==================================*/
+/*====================================
+ANALYTICS SECTION
+====================================*/
 
-.gauge-section{
+.analytics-section{
+
+margin:40px 35px;
+
+}
+
+/*====================================
+GAUGE GRID
+====================================*/
+
+.gauge-grid{
 
 display:grid;
 
@@ -948,23 +1497,31 @@ grid-template-columns:repeat(4,1fr);
 
 gap:25px;
 
-margin:30px;
+margin-bottom:35px;
 
 }
+
+/*====================================
+GAUGE CARD
+====================================*/
 
 .gauge-card{
 
 background:#ffffff;
 
-padding:25px;
+padding:30px;
 
-border-radius:20px;
+border-radius:22px;
+
+text-align:center;
 
 box-shadow:0 12px 30px rgba(0,0,0,.08);
 
 transition:.35s;
 
-text-align:center;
+position:relative;
+
+overflow:hidden;
 
 }
 
@@ -976,428 +1533,261 @@ box-shadow:0 22px 45px rgba(0,0,0,.15);
 
 }
 
+.gauge-card::before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:6px;
+
+background:#1565C0;
+
+}
+
 .gauge-card h3{
 
 font-size:18px;
 
-font-weight:600;
+font-weight:700;
 
-color:#0B4F75;
+margin-bottom:25px;
 
-margin-bottom:20px;
+color:#23364D;
 
 }
 
 .gauge-card canvas{
 
-width:100%!important;
+width:220px!important;
 
-height:240px!important;
+height:220px!important;
 
-}
+margin:auto;
 
-/*==================================
-ANALYTICS ROW
-==================================*/
-
-.analytics-row{
-
-display:grid;
-
-grid-template-columns:2fr 1fr;
-
-gap:25px;
-
-margin:30px;
+display:block;
 
 }
 
-/*==================================
-CHART PANEL
-==================================*/
-
-.chart-panel{
-
-background:#fff;
-
-padding:30px;
-
-border-radius:20px;
-
-box-shadow:0 12px 30px rgba(0,0,0,.08);
-
-}
-
-.panel-header{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-margin-bottom:25px;
-
-}
-
-.panel-header h2{
-
-font-size:24px;
-
-font-weight:700;
-
-color:#0B4F75;
-
-}
-
-.panel-header p{
-
-font-size:14px;
-
-color:#777;
-
-}
-
-.panel-header select{
-
-padding:12px 18px;
-
-border:1px solid #dfe6ee;
-
-border-radius:10px;
-
-background:#fff;
-
-font-size:14px;
-
-font-weight:500;
-
-cursor:pointer;
-
-outline:none;
-
-}
-
-.chart-panel canvas{
-
-width:100%!important;
-
-height:430px!important;
-
-}
-
-/*==================================
-SUMMARY PANEL
-==================================*/
-
-.analytics-panel{
-
-background:#fff;
-
-padding:30px;
-
-border-radius:20px;
-
-box-shadow:0 12px 30px rgba(0,0,0,.08);
-
-display:flex;
-
-flex-direction:column;
-
-justify-content:flex-start;
-
-}
-
-.analytics-panel h2{
-
-font-size:24px;
-
-color:#0B4F75;
-
-margin-bottom:25px;
-
-}
-
-.summary-list{
-
-display:flex;
-
-flex-direction:column;
-
-gap:18px;
-
-}
-
-.summary-item{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-padding:16px 20px;
-
-background:#F8FBFF;
-
-border-radius:12px;
-
-transition:.3s;
-
-}
-
-.summary-item:hover{
-
-background:#EDF7FF;
-
-transform:translateX(6px);
-
-}
-
-.summary-item span{
-
-font-size:15px;
-
-color:#666;
-
-font-weight:500;
-
-}
-
-.summary-item b{
-
-font-size:16px;
-
-font-weight:700;
-
-color:#0B4F75;
-
-}
-
-/*==================================
-ONLINE STATUS
-==================================*/
-
-.online{
-
-color:#2ECC71!important;
-
-}
-
-/*==================================
-KPI COLORS
-==================================*/
-
-.good{
-
-color:#2ECC71;
-
-}
-
-.medium{
-
-color:#F39C12;
-
-}
-
-.high{
-
-color:#E74C3C;
-
-}
-
-/*==================================
-CHART TOOLBAR
-==================================*/
-
-.chart-toolbar{
-
-display:flex;
-
-gap:12px;
-
-margin-bottom:20px;
-
-}
-
-.chart-toolbar button{
-
-padding:10px 18px;
-
-border:none;
-
-border-radius:10px;
-
-background:#EDF7FF;
-
-color:#1565C0;
-
-font-weight:600;
-
-cursor:pointer;
-
-transition:.3s;
-
-}
-
-.chart-toolbar button:hover{
-
-background:#1565C0;
-
-color:#fff;
-
-}
-
-/*==================================
-ANALYTICS BOX
-==================================*/
-
-.analytics-box{
-
-margin-top:25px;
-
-padding:20px;
-
-border-radius:15px;
-
-background:linear-gradient(135deg,#0B4F75,#1565C0);
-
-color:#fff;
-
-}
-
-.analytics-box h3{
-
-margin-bottom:10px;
-
-font-size:18px;
-
-}
-
-.analytics-box p{
-
-font-size:14px;
-
-line-height:26px;
-
-opacity:.95;
-
-}
-
-/*==================================
-CHART LEGEND
-==================================*/
-
-.legend{
-
-display:flex;
-
-gap:20px;
+.gauge-reading{
 
 margin-top:20px;
 
-justify-content:center;
+}
+
+.gauge-reading h2{
+
+font-size:30px;
+
+font-weight:700;
+
+color:#1565C0;
+
+margin-bottom:8px;
 
 }
 
-.legend div{
+.gauge-reading p{
+
+font-size:15px;
+
+font-weight:600;
+
+color:#666;
+
+}
+
+/*====================================
+CHART CONTAINER
+====================================*/
+
+.chart-container{
+
+background:#ffffff;
+
+padding:35px;
+
+border-radius:25px;
+
+box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+margin-bottom:35px;
+
+}
+
+.chart-header{
 
 display:flex;
 
+justify-content:space-between;
+
 align-items:center;
 
-gap:8px;
+margin-bottom:25px;
 
-font-size:14px;
+}
+
+.chart-header h2{
+
+font-size:28px;
+
+font-weight:700;
+
+color:#1565C0;
+
+margin-bottom:6px;
+
+}
+
+.chart-header p{
+
+color:#777;
+
+font-size:15px;
+
+}
+
+.chart-actions{
+
+display:flex;
+
+gap:15px;
+
+align-items:center;
+
+}
+
+.chart-actions select{
+
+padding:12px 18px;
+
+border:2px solid #E3EAF3;
+
+border-radius:12px;
+
+font-size:15px;
+
+outline:none;
+
+background:#fff;
+
+}
+
+.chart-actions button{
+
+padding:12px 22px;
+
+background:#E53935;
+
+color:#fff;
+
+border-radius:12px;
 
 font-weight:600;
 
 }
 
-.legend span{
+.chart-actions button:hover{
 
-width:16px;
-
-height:16px;
-
-border-radius:50%;
-
-display:inline-block;
+background:#C62828;
 
 }
 
-.legend .co2{
+/*====================================
+CHART BOX
+====================================*/
 
-background:#2ECC71;
+.chart-box{
 
-}
+height:500px;
 
-.legend .nh3{
-
-background:#F39C12;
-
-}
-
-.legend .h2s{
-
-background:#E74C3C;
+position:relative;
 
 }
 
-.legend .tvoc{
+.chart-box canvas{
 
-background:#1565C0;
+width:100%!important;
 
-}
-
-/*==================================
-HOVER EFFECT
-==================================*/
-
-.chart-panel:hover,
-
-.analytics-panel:hover,
-
-.gauge-card:hover{
-
-transition:.35s;
+height:100%!important;
 
 }
-/*==================================================
-STYLE.CSS PART 4
-Threshold Panel
-AI Recommendation
-Health Index
-Desktop Enterprise UI
-==================================================*/
 
-/*==================================
-CONFIGURATION ROW
-==================================*/
+/*====================================
+SUMMARY GRID
+====================================*/
 
-.config-row{
+.summary-grid{
 
 display:grid;
 
-grid-template-columns:2fr 1fr;
+grid-template-columns:repeat(4,1fr);
 
-gap:25px;
+gap:22px;
 
-margin:30px;
+margin-bottom:35px;
 
 }
 
-/*==================================
-THRESHOLD PANEL
-==================================*/
-
-.threshold-panel{
+.summary-card{
 
 background:#ffffff;
 
 padding:30px;
 
 border-radius:20px;
+
+text-align:center;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+transition:.35s;
+
+}
+
+.summary-card:hover{
+
+transform:translateY(-6px);
+
+}
+
+.summary-card h4{
+
+font-size:15px;
+
+color:#777;
+
+margin-bottom:12px;
+
+}
+
+.summary-card h2{
+
+font-size:32px;
+
+font-weight:700;
+
+color:#1565C0;
+
+}
+
+/*====================================
+THRESHOLD PANEL
+====================================*/
+
+.threshold-panel{
+
+background:#ffffff;
+
+padding:35px;
+
+border-radius:25px;
 
 box-shadow:0 12px 30px rgba(0,0,0,.08);
 
@@ -1405,23 +1795,19 @@ box-shadow:0 12px 30px rgba(0,0,0,.08);
 
 .threshold-panel h2{
 
-font-size:26px;
+font-size:28px;
 
-color:#0B4F75;
+font-weight:700;
 
-margin-bottom:10px;
-
-}
-
-.threshold-panel p{
-
-font-size:15px;
-
-color:#777;
+color:#1565C0;
 
 margin-bottom:25px;
 
 }
+
+/*====================================
+TABLE
+====================================*/
 
 .threshold-table{
 
@@ -1429,516 +1815,339 @@ width:100%;
 
 border-collapse:collapse;
 
-margin-top:20px;
+overflow:hidden;
+
+border-radius:18px;
 
 }
 
 .threshold-table thead{
 
-background:#0B4F75;
+background:#1565C0;
 
-color:#fff;
+color:#ffffff;
 
 }
 
 .threshold-table th{
 
-padding:16px;
+padding:18px;
 
-font-size:15px;
+font-size:16px;
 
 font-weight:600;
-
-text-align:center;
 
 }
 
 .threshold-table td{
 
-padding:16px;
-
-text-align:center;
-
-border-bottom:1px solid #ECECEC;
-
-}
-
-.threshold-table tr:nth-child(even){
-
-background:#F8FBFF;
-
-}
-
-.threshold-table input{
-
-width:95px;
-
-padding:12px;
-
-border:1px solid #d6dde5;
-
-border-radius:10px;
+padding:18px;
 
 text-align:center;
 
 font-size:15px;
 
-font-weight:600;
-
-outline:none;
-
-transition:.3s;
+border-bottom:1px solid #EDF2F7;
 
 }
 
-.threshold-table input:focus{
+.threshold-table tbody tr:nth-child(even){
 
-border:2px solid #1565C0;
-
-background:#EDF7FF;
+background:#F8FBFF;
 
 }
 
-/*==================================
-BUTTONS
-==================================*/
+.threshold-table tbody tr:hover{
 
-.config-buttons{
+background:#EDF6FF;
 
-display:flex;
+}
 
-justify-content:flex-end;
+/*====================================
+SAFE
+====================================*/
 
-gap:18px;
+.threshold-table td:nth-child(2){
+
+font-weight:700;
+
+color:#00B050;
+
+}
+
+/*====================================
+WARNING
+====================================*/
+
+.threshold-table td:nth-child(3){
+
+font-weight:700;
+
+color:#F39C12;
+
+}
+
+/*====================================
+CRITICAL
+====================================*/
+
+.threshold-table td:nth-child(4){
+
+font-weight:700;
+
+color:#E53935;
+
+}
+
+/*====================================
+STATUS ANIMATION
+====================================*/
+
+.gauge-card,
+
+.chart-container,
+
+.summary-card,
+
+.threshold-panel{
+
+transition:all .35s ease;
+
+}
+/*==================================================
+STYLE.CSS V3
+PART 5
+AI Recommendation
+SMS
+Email
+WhatsApp
+Alert History
+Desktop Version
+==================================================*/
+
+/*====================================
+AI SECTION
+====================================*/
+
+.ai-section{
+
+margin:40px 35px;
+
+}
+
+.ai-grid{
+
+display:grid;
+
+grid-template-columns:1fr 2fr 1fr;
+
+gap:25px;
 
 margin-top:30px;
 
 }
 
-.config-buttons button{
-
-padding:14px 30px;
-
-border:none;
-
-border-radius:12px;
-
-cursor:pointer;
-
-font-size:15px;
-
-font-weight:600;
-
-transition:.3s;
-
-}
-
-#applySettings{
-
-background:#00B050;
-
-color:#fff;
-
-}
-
-#applySettings:hover{
-
-background:#008A3D;
-
-transform:translateY(-4px);
-
-}
-
-#resetSettings{
-
-background:#E74C3C;
-
-color:#fff;
-
-}
-
-#resetSettings:hover{
-
-background:#C0392B;
-
-transform:translateY(-4px);
-
-}
-
-/*==================================
-AI PANEL
-==================================*/
-
-.ai-panel{
-
-background:linear-gradient(135deg,#0B4F75,#1565C0);
-
-color:#fff;
-
-padding:30px;
-
-border-radius:20px;
-
-box-shadow:0 15px 35px rgba(0,0,0,.18);
-
-position:relative;
-
-overflow:hidden;
-
-}
-
-.ai-panel::before{
-
-content:"";
-
-position:absolute;
-
-right:-60px;
-
-top:-60px;
-
-width:180px;
-
-height:180px;
-
-background:rgba(255,255,255,.08);
-
-border-radius:50%;
-
-}
-
-.ai-panel h2{
-
-font-size:24px;
-
-margin-bottom:25px;
-
-}
-
-.ai-score{
-
-text-align:center;
-
-margin-bottom:25px;
-
-}
-
-.ai-score h1{
-
-font-size:62px;
-
-font-weight:800;
-
-}
-
-.ai-score p{
-
-font-size:15px;
-
-opacity:.9;
-
-}
-
-.recommendation-box{
-
-background:rgba(255,255,255,.12);
-
-padding:20px;
-
-border-radius:15px;
-
-margin-bottom:20px;
-
-}
-
-.recommendation-box h3{
-
-margin-bottom:12px;
-
-font-size:18px;
-
-}
-
-.recommendation-box p{
-
-line-height:28px;
-
-font-size:15px;
-
-}
-
-.recommendation-list{
-
-display:flex;
-
-flex-direction:column;
-
-gap:15px;
-
-margin-bottom:25px;
-
-}
-
-.recommend-item{
-
-display:flex;
-
-align-items:flex-start;
-
-gap:12px;
-
-background:rgba(255,255,255,.10);
-
-padding:15px;
-
-border-radius:12px;
-
-}
-
-.recommend-item i{
-
-color:#2ECC71;
-
-font-size:18px;
-
-margin-top:3px;
-
-}
-
-.recommend-item span{
-
-line-height:24px;
-
-font-size:15px;
-
-}
-
-.prediction-card{
+/*====================================
+AI CARD
+====================================*/
+
+.ai-card{
 
 background:#ffffff;
 
-color:#23364d;
+padding:35px;
 
-padding:20px;
-
-border-radius:15px;
-
-}
-
-.prediction-card h4{
-
-font-size:16px;
-
-color:#666;
-
-margin-bottom:8px;
-
-}
-
-.prediction-card h2{
-
-font-size:28px;
-
-color:#E67E22;
-
-margin-bottom:10px;
-
-}
-
-.prediction-card p{
-
-line-height:25px;
-
-font-size:15px;
-
-}
-
-/*==================================
-HEALTH INDEX
-==================================*/
-
-.health-row{
-
-display:grid;
-
-grid-template-columns:1.3fr 1fr;
-
-gap:25px;
-
-margin:30px;
-
-}
-
-.health-card{
-
-background:#fff;
-
-padding:30px;
-
-border-radius:20px;
+border-radius:25px;
 
 box-shadow:0 12px 30px rgba(0,0,0,.08);
 
+transition:.35s;
+
 }
 
-.health-card h3{
+.ai-card:hover{
+
+transform:translateY(-8px);
+
+box-shadow:0 20px 45px rgba(0,0,0,.15);
+
+}
+
+.ai-card.large{
+
+min-height:340px;
+
+}
+
+.ai-card h3{
 
 font-size:24px;
-
-margin-bottom:25px;
-
-color:#0B4F75;
-
-}
-
-/*==================================
-HEALTH BAR
-==================================*/
-
-.health-bar{
-
-width:100%;
-
-height:34px;
-
-background:#e6edf4;
-
-border-radius:30px;
-
-overflow:hidden;
-
-margin:25px 0;
-
-}
-
-#healthFill{
-
-height:100%;
-
-width:96%;
-
-background:linear-gradient(90deg,#2ECC71,#00B050);
-
-color:#fff;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-font-size:15px;
-
-font-weight:700;
-
-transition:1s;
-
-}
-
-.health-card p{
-
-font-size:15px;
-
-line-height:28px;
-
-color:#666;
-
-}
-
-/*==================================
-PERFORMANCE TABLE
-==================================*/
-
-.performance-table{
-
-width:100%;
-
-border-collapse:collapse;
-
-}
-
-.performance-table td{
-
-padding:16px;
-
-border-bottom:1px solid #ECECEC;
-
-font-size:15px;
-
-}
-
-.performance-table td:first-child{
-
-font-weight:600;
-
-color:#666;
-
-width:60%;
-
-}
-
-.performance-table td:last-child{
 
 font-weight:700;
 
 color:#1565C0;
 
-text-align:right;
+margin-bottom:25px;
 
 }
 
-/*==================================
-PANEL HOVER
-==================================*/
+/*====================================
+HEALTH CIRCLE
+====================================*/
 
-.threshold-panel:hover,
+.health-circle{
 
-.ai-panel:hover,
+width:180px;
 
-.health-card:hover{
+height:180px;
 
-transform:translateY(-6px);
+margin:auto;
 
-transition:.35s;
+border-radius:50%;
 
-box-shadow:0 20px 40px rgba(0,0,0,.15);
+background:linear-gradient(135deg,#00C853,#1565C0);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+color:#fff;
+
+box-shadow:0 20px 40px rgba(0,200,83,.25);
 
 }
-/*==================================================
-STYLE.CSS PART 5
-SMS Panel
-Email Panel
-Alerts
-Device Information
-Reports
-Footer
-Desktop Enterprise UI
-==================================================*/
 
-/*==================================
-COMMUNICATION ROW
-==================================*/
+.health-circle h1{
 
-.communication-row{
+font-size:48px;
+
+font-weight:800;
+
+}
+
+#healthRemark{
+
+margin-top:25px;
+
+text-align:center;
+
+font-size:18px;
+
+font-weight:600;
+
+color:#555;
+
+}
+
+/*====================================
+AI RECOMMENDATION
+====================================*/
+
+#recommendationBox{
+
+background:#F8FBFF;
+
+padding:25px;
+
+border-radius:18px;
+
+min-height:220px;
+
+}
+
+.recommendation{
+
+display:flex;
+
+gap:18px;
+
+align-items:flex-start;
+
+font-size:17px;
+
+line-height:34px;
+
+}
+
+.recommendation i{
+
+font-size:32px;
+
+color:#00C853;
+
+margin-top:6px;
+
+}
+
+#recommendationText{
+
+font-size:17px;
+
+color:#444;
+
+font-weight:500;
+
+}
+
+/*====================================
+PREDICTION
+====================================*/
+
+#predictionLevel{
+
+font-size:42px;
+
+font-weight:800;
+
+margin-bottom:18px;
+
+color:#1565C0;
+
+}
+
+#predictionMessage{
+
+font-size:17px;
+
+line-height:32px;
+
+color:#555;
+
+}
+
+/*====================================
+COMMUNICATION
+====================================*/
+
+.communication-section{
+
+margin:40px 35px;
+
+}
+
+.communication-grid{
 
 display:grid;
 
-grid-template-columns:1fr 1fr;
+grid-template-columns:repeat(3,1fr);
 
 gap:25px;
 
-margin:30px;
-
 }
 
-.sms-panel,
-.email-panel{
+/*====================================
+MESSAGE CARD
+====================================*/
+
+.message-card{
 
 background:#ffffff;
 
 padding:30px;
 
-border-radius:20px;
+border-radius:22px;
 
 box-shadow:0 12px 30px rgba(0,0,0,.08);
 
@@ -1946,48 +2155,49 @@ transition:.35s;
 
 }
 
-.sms-panel:hover,
-.email-panel:hover{
+.message-card:hover{
 
 transform:translateY(-6px);
 
-box-shadow:0 20px 40px rgba(0,0,0,.15);
+}
+
+.message-header{
+
+font-size:24px;
+
+font-weight:700;
+
+color:#1565C0;
+
+margin-bottom:25px;
 
 }
 
-/*==================================
-MESSAGE BOX
-==================================*/
+.message-body label{
 
-.message-box{
+display:block;
 
-display:flex;
-
-flex-direction:column;
-
-gap:15px;
-
-margin-top:20px;
-
-}
-
-.message-box label{
-
-font-weight:600;
+margin-bottom:8px;
 
 font-size:15px;
 
-color:#555;
+font-weight:600;
+
+color:#666;
 
 }
 
-.message-box input{
+.message-body input{
+
+width:100%;
 
 padding:14px;
 
-border:1px solid #dcdcdc;
+margin-bottom:18px;
 
-border-radius:10px;
+border:2px solid #E5ECF3;
+
+border-radius:12px;
 
 background:#F8FBFF;
 
@@ -1995,15 +2205,17 @@ font-size:15px;
 
 }
 
-.message-box textarea{
+.message-body textarea{
 
-height:220px;
+width:100%;
+
+height:260px;
 
 padding:18px;
 
-border-radius:12px;
+border:2px solid #E5ECF3;
 
-border:1px solid #dcdcdc;
+border-radius:12px;
 
 background:#F8FBFF;
 
@@ -2015,143 +2227,282 @@ line-height:28px;
 
 }
 
-.action-buttons{
+/*====================================
+BUTTONS
+====================================*/
+
+.message-buttons{
 
 display:flex;
 
-gap:15px;
+gap:12px;
 
 margin-top:20px;
 
 }
 
-.action-buttons button,
-
-.email-panel button{
+.message-buttons button{
 
 flex:1;
 
 padding:14px;
 
-border:none;
-
 border-radius:12px;
-
-background:#1565C0;
-
-color:#fff;
 
 font-weight:600;
 
-cursor:pointer;
-
-transition:.3s;
+color:#fff;
 
 }
 
-.action-buttons button:hover,
+#previewSMS,
+#previewEmail,
+#previewWhatsApp{
 
-.email-panel button:hover{
-
-background:#0B4F75;
-
-}
-
-/*==================================
-ALERT SECTION
-==================================*/
-
-.alerts-section{
-
-margin:30px;
-
-background:#fff;
-
-padding:30px;
-
-border-radius:20px;
-
-box-shadow:0 12px 30px rgba(0,0,0,.08);
+background:#1565C0;
 
 }
 
-.alert-table{
+#copySMS,
+#copyEmail,
+#copyWhatsApp{
+
+background:#00C853;
+
+}
+
+#sendSMS,
+#sendEmail,
+#sendWhatsApp{
+
+background:#FF9800;
+
+}
+
+/*====================================
+ALERT HISTORY
+====================================*/
+
+.history-section{
+
+margin:40px 35px;
+
+}
+
+.history-table{
 
 width:100%;
 
 border-collapse:collapse;
 
-margin-top:25px;
+background:#ffffff;
+
+border-radius:22px;
+
+overflow:hidden;
+
+box-shadow:0 12px 30px rgba(0,0,0,.08);
 
 }
 
-.alert-table th{
+.history-table thead{
 
-background:#0B4F75;
+background:#1565C0;
 
-color:#fff;
+color:#ffffff;
 
-padding:16px;
+}
+
+.history-table th{
+
+padding:18px;
+
+font-size:16px;
+
+}
+
+.history-table td{
+
+padding:18px;
+
+border-bottom:1px solid #EDF2F7;
 
 font-size:15px;
 
 }
 
-.alert-table td{
-
-padding:16px;
-
-border-bottom:1px solid #ECECEC;
-
-font-size:14px;
-
-}
-
-.alert-table tr:hover{
+.history-table tbody tr:nth-child(even){
 
 background:#F8FBFF;
 
 }
 
-.normal-badge{
+.history-table tbody tr:hover{
 
-background:#EAFBF1;
+background:#EDF6FF;
 
-color:#00A65A;
+}
 
-padding:8px 15px;
+/*====================================
+STATUS TAGS
+====================================*/
 
-border-radius:25px;
+.green-tag{
+
+background:#00C853;
+
+color:#fff;
+
+padding:8px 18px;
+
+border-radius:30px;
+
+font-size:13px;
+
+font-weight:700;
+
+}
+
+.yellow-tag{
+
+background:#FF9800;
+
+color:#fff;
+
+padding:8px 18px;
+
+border-radius:30px;
+
+font-size:13px;
+
+font-weight:700;
+
+}
+
+.red-tag{
+
+background:#E53935;
+
+color:#fff;
+
+padding:8px 18px;
+
+border-radius:30px;
+
+font-size:13px;
+
+font-weight:700;
+
+animation:blink 1s infinite;
+
+}
+/*==================================================
+STYLE.CSS V3
+PART 6
+Reports
+Device Information
+System Health
+Quick Actions
+Footer
+Dark Mode
+Responsive
+==================================================*/
+
+/*==================================
+REPORT SECTION
+==================================*/
+
+.reports-section{
+
+margin:40px 35px;
+
+}
+
+.report-grid{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:25px;
+
+margin-top:30px;
+
+}
+
+.report-card{
+
+background:#ffffff;
+
+padding:35px;
+
+text-align:center;
+
+border-radius:22px;
+
+box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+transition:.35s;
+
+}
+
+.report-card:hover{
+
+transform:translateY(-8px);
+
+box-shadow:0 20px 45px rgba(0,0,0,.15);
+
+}
+
+.report-card i{
+
+font-size:55px;
+
+color:#1565C0;
+
+margin-bottom:20px;
+
+}
+
+.report-card h3{
+
+font-size:22px;
+
+color:#23364D;
+
+margin-bottom:15px;
+
+}
+
+.report-card p{
+
+font-size:15px;
+
+line-height:28px;
+
+color:#777;
+
+margin-bottom:25px;
+
+}
+
+.report-card button{
+
+padding:14px 30px;
+
+background:#1565C0;
+
+color:#fff;
+
+border-radius:12px;
 
 font-weight:600;
 
 }
 
-.warning-badge{
+.report-card button:hover{
 
-background:#FFF4D6;
-
-color:#F39C12;
-
-padding:8px 15px;
-
-border-radius:25px;
-
-font-weight:600;
-
-}
-
-.critical-badge{
-
-background:#FDECEC;
-
-color:#E74C3C;
-
-padding:8px 15px;
-
-border-radius:25px;
-
-font-weight:600;
+background:#0B4F75;
 
 }
 
@@ -2163,23 +2514,21 @@ DEVICE SECTION
 
 display:grid;
 
-grid-template-columns:350px 1fr;
+grid-template-columns:400px 1fr;
 
-gap:25px;
+gap:30px;
 
-margin:30px;
+margin:40px 35px;
 
 }
 
-.device-card{
+.device-image-card{
 
-background:#fff;
+background:#ffffff;
 
 padding:30px;
 
-border-radius:20px;
-
-box-shadow:0 12px 30px rgba(0,0,0,.08);
+border-radius:22px;
 
 display:flex;
 
@@ -2187,13 +2536,15 @@ justify-content:center;
 
 align-items:center;
 
+box-shadow:0 12px 30px rgba(0,0,0,.08);
+
 }
 
 .device-image{
 
-width:250px;
+width:280px;
 
-transition:.5s;
+transition:.35s;
 
 }
 
@@ -2203,23 +2554,25 @@ transform:scale(1.05);
 
 }
 
-.device-info{
+.device-details{
 
-background:#fff;
+background:#ffffff;
 
-padding:30px;
+padding:35px;
 
-border-radius:20px;
+border-radius:22px;
 
 box-shadow:0 12px 30px rgba(0,0,0,.08);
 
 }
 
-.device-info h2{
+.device-details h2{
 
-color:#0B4F75;
+font-size:30px;
 
 margin-bottom:25px;
+
+color:#1565C0;
 
 }
 
@@ -2233,9 +2586,11 @@ border-collapse:collapse;
 
 .device-table td{
 
-padding:15px;
+padding:18px;
 
-border-bottom:1px solid #ECECEC;
+border-bottom:1px solid #EDF2F7;
+
+font-size:15px;
 
 }
 
@@ -2245,7 +2600,7 @@ font-weight:600;
 
 color:#666;
 
-width:40%;
+width:35%;
 
 }
 
@@ -2258,136 +2613,50 @@ color:#1565C0;
 }
 
 /*==================================
-REPORT SECTION
+SYSTEM HEALTH
 ==================================*/
 
-.report-section{
-
-margin:30px;
-
-}
-
-.report-grid{
+.system-health{
 
 display:grid;
 
 grid-template-columns:repeat(4,1fr);
 
-gap:22px;
+gap:25px;
+
+margin:40px 35px;
 
 }
 
-.report-card{
+.health-card{
 
-background:#fff;
+background:#ffffff;
 
-padding:30px;
+padding:28px;
 
 border-radius:20px;
 
-text-align:center;
-
 box-shadow:0 12px 30px rgba(0,0,0,.08);
 
-transition:.35s;
-
 }
 
-.report-card:hover{
+.health-card h3{
 
-transform:translateY(-8px);
+font-size:18px;
 
-}
-
-.report-card i{
-
-font-size:50px;
+margin-bottom:20px;
 
 color:#1565C0;
-
-margin-bottom:20px;
-
-}
-
-.report-card h3{
-
-margin-bottom:12px;
-
-color:#0B4F75;
-
-}
-
-.report-card p{
-
-font-size:14px;
-
-line-height:24px;
-
-color:#666;
-
-margin-bottom:20px;
-
-}
-
-.report-card button{
-
-padding:14px 25px;
-
-background:#1565C0;
-
-color:#fff;
-
-border:none;
-
-border-radius:10px;
-
-cursor:pointer;
-
-}
-
-/*==================================
-SYSTEM STATUS
-==================================*/
-
-.system-status{
-
-display:grid;
-
-grid-template-columns:repeat(4,1fr);
-
-gap:20px;
-
-margin:30px;
-
-}
-
-.status-card{
-
-background:#fff;
-
-padding:25px;
-
-border-radius:18px;
-
-box-shadow:0 12px 25px rgba(0,0,0,.08);
-
-}
-
-.status-card h3{
-
-margin-bottom:15px;
-
-font-size:17px;
-
-color:#0B4F75;
 
 }
 
 .progress{
 
-height:24px;
+width:100%;
 
-background:#EDF2F7;
+height:28px;
+
+background:#E9EEF4;
 
 border-radius:30px;
 
@@ -2401,17 +2670,19 @@ height:100%;
 
 display:flex;
 
-justify-content:center;
-
 align-items:center;
 
-background:linear-gradient(90deg,#1565C0,#00B050);
+justify-content:center;
 
-color:#fff;
+background:linear-gradient(90deg,#1565C0,#00C853);
 
-font-size:13px;
+color:#ffffff;
 
-font-weight:600;
+font-size:14px;
+
+font-weight:700;
+
+transition:.6s;
 
 }
 
@@ -2425,37 +2696,39 @@ display:flex;
 
 justify-content:center;
 
-gap:18px;
-
-margin:35px;
+gap:20px;
 
 flex-wrap:wrap;
+
+margin:45px 35px;
 
 }
 
 .quick-actions button{
 
-padding:15px 28px;
+padding:16px 28px;
 
-background:#0B4F75;
+background:#1565C0;
 
-color:#fff;
+color:#ffffff;
 
-border:none;
+border-radius:14px;
 
-border-radius:12px;
-
-cursor:pointer;
+font-size:15px;
 
 font-weight:600;
 
-transition:.35s;
+display:flex;
+
+align-items:center;
+
+gap:10px;
 
 }
 
 .quick-actions button:hover{
 
-background:#1565C0;
+background:#0B4F75;
 
 transform:translateY(-5px);
 
@@ -2467,129 +2740,230 @@ FOOTER
 
 .footer{
 
-margin-top:40px;
+margin-top:60px;
 
 background:#0B4F75;
 
-color:#fff;
+color:#ffffff;
 
-padding:40px;
+padding:60px;
 
 display:grid;
 
 grid-template-columns:1fr 1fr 1fr;
 
-gap:30px;
+gap:40px;
 
 }
 
 .footer-logo{
 
-width:75px;
+width:80px;
 
-margin-bottom:15px;
+margin-bottom:20px;
 
 }
 
 .footer h2{
 
-margin-bottom:10px;
+font-size:28px;
+
+margin-bottom:15px;
+
+}
+
+.footer h3{
+
+margin-bottom:15px;
 
 }
 
 .footer p{
 
-font-size:14px;
+font-size:15px;
 
-line-height:28px;
+line-height:30px;
 
 opacity:.95;
 
 }
 
-.footer strong{
+.footer b{
 
 color:#9BE7FF;
 
 }
 
-.footer-left{
-
-display:flex;
-
-gap:20px;
-
-align-items:center;
-
-}
-/*==================================================
-STYLE.CSS PART 6
-Responsive + Dark Mode + Animations
-Desktop / Laptop / Tablet
-==================================================*/
-
 /*==================================
-CARD ANIMATION
+DARK MODE
 ==================================*/
 
-.overview-card,
-.sensor-card,
-.gauge-card,
-.chart-panel,
-.analytics-panel,
-.threshold-panel,
-.ai-panel,
-.sms-panel,
-.email-panel,
-.report-card,
-.status-card,
-.device-card,
-.device-info{
+body.dark{
 
-transition:all .35s ease;
+background:#101827;
+
+color:#ffffff;
 
 }
 
-.overview-card:hover,
-.sensor-card:hover,
-.gauge-card:hover,
-.chart-panel:hover,
-.analytics-panel:hover,
-.threshold-panel:hover,
-.ai-panel:hover,
-.sms-panel:hover,
-.email-panel:hover,
-.report-card:hover,
-.status-card:hover,
-.device-card:hover,
-.device-info:hover{
+body.dark .overview-card,
+body.dark .facility,
+body.dark .sensor-card,
+body.dark .gauge-card,
+body.dark .chart-container,
+body.dark .summary-card,
+body.dark .threshold-panel,
+body.dark .ai-card,
+body.dark .message-card,
+body.dark .report-card,
+body.dark .device-image-card,
+body.dark .device-details,
+body.dark .health-card,
+body.dark .history-table{
 
-transform:translateY(-8px);
+background:#1E293B;
 
-box-shadow:0 25px 45px rgba(0,0,0,.15);
+color:#ffffff;
+
+}
+
+body.dark input,
+body.dark textarea,
+body.dark select{
+
+background:#334155;
+
+color:#ffffff;
+
+border-color:#475569;
+
+}
+
+body.dark .top-nav{
+
+background:#111827;
+
+}
+
+body.dark .footer{
+
+background:#020617;
 
 }
 
 /*==================================
-BUTTON EFFECT
+RESPONSIVE
 ==================================*/
 
-button{
+@media(max-width:1400px){
 
-transition:.35s;
+.overview-grid,
+.sensor-grid,
+.gauge-grid,
+.report-grid,
+.system-health{
+
+grid-template-columns:repeat(2,1fr);
 
 }
 
-button:hover{
+.facility-grid{
 
-transform:translateY(-4px);
+grid-template-columns:repeat(3,1fr);
 
-box-shadow:0 12px 25px rgba(0,0,0,.18);
+}
+
+.communication-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.ai-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.device-section{
+
+grid-template-columns:1fr;
+
+}
+
+.footer{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.hero{
+
+grid-template-columns:1fr;
+
+padding:40px;
+
+}
+
+.hero h1{
+
+font-size:38px;
+
+line-height:50px;
+
+}
+
+.hero-buttons{
+
+flex-direction:column;
+
+}
+
+.overview-grid,
+.sensor-grid,
+.gauge-grid,
+.summary-grid,
+.report-grid,
+.system-health{
+
+grid-template-columns:1fr;
+
+}
+
+.facility-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.sensor-input-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.quick-actions{
+
+flex-direction:column;
+
+}
+
+.quick-actions button{
+
+width:100%;
+
+justify-content:center;
+
+}
 
 }
 
 /*==================================
-SCROLL BAR
+SCROLLBAR
 ==================================*/
 
 ::-webkit-scrollbar{
@@ -2600,7 +2974,7 @@ width:10px;
 
 ::-webkit-scrollbar-track{
 
-background:#EDF3F9;
+background:#E9EEF4;
 
 }
 
@@ -2615,359 +2989,6 @@ border-radius:20px;
 ::-webkit-scrollbar-thumb:hover{
 
 background:#0B4F75;
-
-}
-
-/*==================================
-LOADING EFFECT
-==================================*/
-
-.fade-in{
-
-animation:fadeIn .6s ease-in-out;
-
-}
-
-@keyframes fadeIn{
-
-0%{
-
-opacity:0;
-
-transform:translateY(15px);
-
-}
-
-100%{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
-
-}
-
-/*==================================
-GLOW EFFECT
-==================================*/
-
-.green-glow{
-
-box-shadow:0 0 20px rgba(46,204,113,.4);
-
-}
-
-.orange-glow{
-
-box-shadow:0 0 20px rgba(243,156,18,.4);
-
-}
-
-.red-glow{
-
-box-shadow:0 0 20px rgba(231,76,60,.4);
-
-}
-
-/*==================================
-TABLET
-==================================*/
-
-@media(max-width:1200px){
-
-.hero{
-
-grid-template-columns:1fr;
-
-text-align:center;
-
-}
-
-.system-overview{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-.facility-grid{
-
-grid-template-columns:repeat(3,1fr);
-
-}
-
-.sensor-grid{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-.gauge-section{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-.analytics-row{
-
-grid-template-columns:1fr;
-
-}
-
-.config-row{
-
-grid-template-columns:1fr;
-
-}
-
-.communication-row{
-
-grid-template-columns:1fr;
-
-}
-
-.device-section{
-
-grid-template-columns:1fr;
-
-}
-
-.report-grid{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-.system-status{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-.footer{
-
-grid-template-columns:1fr;
-
-text-align:center;
-
-}
-
-}
-
-/*==================================
-MOBILE
-==================================*/
-
-@media(max-width:768px){
-
-.top-nav{
-
-padding:15px;
-
-height:auto;
-
-flex-direction:column;
-
-gap:20px;
-
-}
-
-.brand{
-
-flex-direction:column;
-
-text-align:center;
-
-}
-
-.hero{
-
-padding:30px;
-
-margin:15px;
-
-}
-
-.hero h1{
-
-font-size:36px;
-
-line-height:46px;
-
-}
-
-.hero p{
-
-font-size:15px;
-
-line-height:28px;
-
-}
-
-.hero-buttons{
-
-flex-direction:column;
-
-}
-
-.hero-buttons button{
-
-width:100%;
-
-}
-
-.system-overview{
-
-grid-template-columns:1fr;
-
-margin:15px;
-
-}
-
-.facility-grid{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-.sensor-grid{
-
-grid-template-columns:1fr;
-
-}
-
-.gauge-section{
-
-grid-template-columns:1fr;
-
-}
-
-.report-grid{
-
-grid-template-columns:1fr;
-
-}
-
-.quick-actions{
-
-flex-direction:column;
-
-}
-
-.quick-actions button{
-
-width:100%;
-
-}
-
-.system-status{
-
-grid-template-columns:1fr;
-
-}
-
-.section-title{
-
-flex-direction:column;
-
-align-items:flex-start;
-
-gap:10px;
-
-}
-
-}
-
-/*==================================
-PRINT MODE
-==================================*/
-
-@media print{
-
-.top-nav,
-.hero-buttons,
-.quick-actions,
-.demo-controls,
-button{
-
-display:none;
-
-}
-
-body{
-
-background:#fff;
-
-}
-
-.hero,
-.report-card,
-.chart-panel,
-.analytics-panel{
-
-box-shadow:none;
-
-}
-
-}
-
-/*==================================
-DARK MODE
-==================================*/
-
-body.dark{
-
-background:#111827;
-
-color:#ffffff;
-
-}
-
-body.dark .top-nav,
-body.dark .overview-card,
-body.dark .sensor-card,
-body.dark .gauge-card,
-body.dark .chart-panel,
-body.dark .analytics-panel,
-body.dark .threshold-panel,
-body.dark .health-card,
-body.dark .sms-panel,
-body.dark .email-panel,
-body.dark .alerts-section,
-body.dark .device-card,
-body.dark .device-info,
-body.dark .report-card,
-body.dark .status-card{
-
-background:#1F2937;
-
-color:#ffffff;
-
-}
-
-body.dark input,
-body.dark textarea,
-body.dark select{
-
-background:#374151;
-
-color:#ffffff;
-
-border:1px solid #555;
-
-}
-
-body.dark table td{
-
-background:#1F2937;
-
-color:#fff;
-
-}
-
-body.dark .footer{
-
-background:#0B1220;
 
 }
 
