@@ -1441,3 +1441,16 @@ console.log(
 "font-size:22px;font-weight:bold;color:#1565C0"
 
 );
+/* Hide Loader */
+
+window.addEventListener("load", function () {
+
+    const loader = document.getElementById("loader");
+
+    if (loader) {
+
+        loader.style.display = "none";
+
+    }
+
+});
