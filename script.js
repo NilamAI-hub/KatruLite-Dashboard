@@ -1,30 +1,25 @@
 /*==================================================
-KATRU LITE DASHBOARD V2
-script.js PART 1
-Core Dashboard Engine
+KATRU LITE DASHBOARD V3
+script.js
+PART 1
+Core Engine
 ==================================================*/
 
-/*==================================
+/*=========================================
 LIVE CLOCK
-==================================*/
+=========================================*/
 
 function updateClock(){
 
 const now=new Date();
 
-const options={
-
-hour:'2-digit',
-
-minute:'2-digit',
-
-second:'2-digit'
-
-};
-
 document.getElementById("clock").innerHTML=
 
-now.toLocaleTimeString('en-US',options);
+now.toLocaleTimeString();
+
+document.getElementById("currentDate").innerHTML=
+
+now.toDateString();
 
 }
 
@@ -32,520 +27,572 @@ setInterval(updateClock,1000);
 
 updateClock();
 
-/*==================================
-FACILITY DATABASE
-==================================*/
+/*=========================================
+CURRENT FACILITY
+=========================================*/
 
-const facilityData={
+let currentFacility="Public Toilet";
 
-toilet:{
+/*=========================================
+FACILITY SELECTION
+=========================================*/
 
-name:"Public Toilet",
-
-health:96,
-
-aqi:"GOOD",
-
-co2:520,
-
-nh3:12,
-
-h2s:2,
-
-tvoc:210,
-
-pm:18,
-
-temp:29,
-
-humidity:64
-
-},
-
-community:{
-
-name:"Community Toilet",
-
-health:92,
-
-aqi:"GOOD",
-
-co2:610,
-
-nh3:16,
-
-h2s:3,
-
-tvoc:240,
-
-pm:22,
-
-temp:30,
-
-humidity:68
-
-},
-
-factory:{
-
-name:"Industrial Factory",
-
-health:80,
-
-aqi:"MODERATE",
-
-co2:890,
-
-nh3:28,
-
-h2s:6,
-
-tvoc:420,
-
-pm:42,
-
-temp:34,
-
-humidity:58
-
-},
-
-school:{
-
-name:"School",
-
-health:98,
-
-aqi:"GOOD",
-
-co2:470,
-
-nh3:5,
-
-h2s:1,
-
-tvoc:110,
-
-pm:12,
-
-temp:27,
-
-humidity:60
-
-},
-
-hospital:{
-
-name:"Hospital",
-
-health:99,
-
-aqi:"GOOD",
-
-co2:430,
-
-nh3:4,
-
-h2s:1,
-
-tvoc:95,
-
-pm:10,
-
-temp:24,
-
-humidity:56
-
-},
-
-stp:{
-
-name:"STP",
-
-health:72,
-
-aqi:"POOR",
-
-co2:980,
-
-nh3:42,
-
-h2s:8,
-
-tvoc:520,
-
-pm:54,
-
-temp:33,
-
-humidity:76
-
-}
-
-};
-
-/*==================================
-LOAD FACILITY
-==================================*/
-
-function loadFacility(type){
-
-let d=facilityData[type];
-
-document.getElementById("facilityName").value=d.name;
-
-document.getElementById("deviceLocation").innerHTML=d.name;
-
-document.getElementById("healthScore").innerHTML=d.health+"%";
-
-document.getElementById("healthFill").style.width=d.health+"%";
-
-document.getElementById("healthFill").innerHTML=d.health+"%";
-
-document.getElementById("aqi").innerHTML=d.aqi;
-
-document.getElementById("co2Value").innerHTML=d.co2;
-
-document.getElementById("nh3Value").innerHTML=d.nh3;
-
-document.getElementById("h2sValue").innerHTML=d.h2s;
-
-document.getElementById("tvocValue").innerHTML=d.tvoc;
-
-document.getElementById("pmValue").innerHTML=d.pm;
-
-document.getElementById("tempValue").innerHTML=d.temp+"°C";
-
-document.getElementById("humidityValue").innerHTML=d.humidity+"%";
-
-}
-
-/*==================================
-FACILITY CLICK
-==================================*/
-
-document.querySelectorAll(".facility").forEach(card=>{
+document.querySelectorAll(".facility").forEach(function(card){
 
 card.addEventListener("click",function(){
 
-document.querySelectorAll(".facility").forEach(c=>{
+document.querySelectorAll(".facility").forEach(function(item){
 
-c.classList.remove("active");
+item.classList.remove("active");
 
 });
 
 this.classList.add("active");
 
-loadFacility(this.dataset.type);
+currentFacility=this.querySelector("h3").innerHTML;
+
+document.getElementById("facilityName").value=currentFacility;
+
+document.getElementById("deviceLocation").innerHTML=currentFacility;
+
+updateDashboard();
 
 });
 
 });
 
-/*==================================
-DEFAULT LOAD
-==================================*/
+/*=========================================
+MASTER DASHBOARD FUNCTION
+=========================================*/
 
-loadFacility("toilet");
+function updateDashboard(){
 
-/*==================================
-LIVE SENSOR SIMULATION
-==================================*/
+const co2=Number(document.getElementById("co2Input").value);
 
-function rand(min,max){
+const nh3=Number(document.getElementById("nh3Input").value);
 
-return Math.floor(Math.random()*(max-min+1))+min;
+const h2s=Number(document.getElementById("h2sInput").value);
+
+const tvoc=Number(document.getElementById("tvocInput").value);
+
+const pm=Number(document.getElementById("pmInput").value);
+
+const temp=Number(document.getElementById("tempInput").value);
+
+const humidity=Number(document.getElementById("humidityInput").value);
+
+/* Update Sensor Cards */
+
+document.getElementById("co2Value").innerHTML=co2;
+
+document.getElementById("nh3Value").innerHTML=nh3;
+
+document.getElementById("h2sValue").innerHTML=h2s;
+
+document.getElementById("tvocValue").innerHTML=tvoc;
+
+document.getElementById("pmValue").innerHTML=pm;
+
+document.getElementById("tempValue").innerHTML=temp+"°C";
+
+document.getElementById("humidityValue").innerHTML=humidity+"%";
+
+/* Update Gauge Labels */
+
+document.getElementById("co2GaugeValue").innerHTML=co2+" ppm";
+
+document.getElementById("nh3GaugeValue").innerHTML=nh3+" ppm";
+
+document.getElementById("h2sGaugeValue").innerHTML=h2s+" ppm";
+
+/* Call Remaining Modules */
+
+updateLevels();
+
+updateHealth();
+
+updateAI();
+
+updateChart();
+
+updateGauge();
+
+updateSMS();
+
+updateEmail();
+
+updateWhatsApp();
+
+updateAlertHistory();
 
 }
 
-setInterval(()=>{
+/*=========================================
+REFRESH BUTTON
+=========================================*/
 
-document.getElementById("co2Value").innerHTML=rand(450,950);
+document.querySelector(".refresh").onclick=function(){
 
-document.getElementById("nh3Value").innerHTML=rand(4,45);
+updateDashboard();
 
-document.getElementById("h2sValue").innerHTML=rand(1,9);
+};
 
-document.getElementById("tvocValue").innerHTML=rand(80,520);
+/*=========================================
+AUTO DEMO
+=========================================*/
 
-document.getElementById("pmValue").innerHTML=rand(10,60);
+document.getElementById("autoDemo").onclick=function(){
 
-document.getElementById("tempValue").innerHTML=rand(24,36)+"°C";
+setInterval(function(){
 
-document.getElementById("humidityValue").innerHTML=rand(50,82)+"%";
+document.getElementById("co2Input").value=
 
-},2500);
+Math.floor(Math.random()*1200)+350;
+
+document.getElementById("nh3Input").value=
+
+Math.floor(Math.random()*60);
+
+document.getElementById("h2sInput").value=
+
+Math.floor(Math.random()*15);
+
+document.getElementById("tvocInput").value=
+
+Math.floor(Math.random()*700);
+
+document.getElementById("pmInput").value=
+
+Math.floor(Math.random()*100);
+
+document.getElementById("tempInput").value=
+
+Math.floor(Math.random()*18)+22;
+
+document.getElementById("humidityInput").value=
+
+Math.floor(Math.random()*45)+40;
+
+updateDashboard();
+
+},3000);
+
+};
+
+/*=========================================
+INITIAL LOAD
+=========================================*/
+
+window.onload=function(){
+
+updateDashboard();
+
+};
+
+console.log("KatrU Lite Core Engine Loaded");
+
 /*==================================================
-SCRIPT.JS PART 2
-Demo Mode
-AI Engine
+SCRIPT.JS V3
+PART 2
+AI Decision Engine
 Threshold Engine
+Health Score
+Alerts
 ==================================================*/
 
-/*==================================
-DEFAULT THRESHOLDS
-==================================*/
+/*=========================================
+THRESHOLD VALUES
+=========================================*/
 
-let threshold={
+const limits={
 
-co2Warn:800,
-co2Critical:1000,
+co2:{safe:800,warning:1000},
 
-nh3Warn:25,
-nh3Critical:50,
+nh3:{safe:25,warning:50},
 
-h2sWarn:5,
-h2sCritical:10,
+h2s:{safe:5,warning:10},
 
-tvocWarn:300,
-tvocCritical:500,
+tvoc:{safe:300,warning:500},
 
-pmWarn:35,
-pmCritical:75,
+pm:{safe:35,warning:75},
 
-tempWarn:35,
-tempCritical:40,
+temp:{safe:35,warning:40},
 
-humWarn:75,
-humCritical:90
+humidity:{safe:75,warning:90}
 
 };
 
-/*==================================
-LOAD THRESHOLD VALUES
-==================================*/
+/*=========================================
+CHECK LEVEL
+=========================================*/
 
-function loadThresholds(){
+function getLevel(value,safe,warning){
 
-document.getElementById("co2Warn").value=threshold.co2Warn;
-document.getElementById("co2Critical").value=threshold.co2Critical;
+if(value<=safe){
 
-document.getElementById("nh3Warn").value=threshold.nh3Warn;
-document.getElementById("nh3Critical").value=threshold.nh3Critical;
-
-document.getElementById("h2sWarn").value=threshold.h2sWarn;
-document.getElementById("h2sCritical").value=threshold.h2sCritical;
-
-document.getElementById("tvocWarn").value=threshold.tvocWarn;
-document.getElementById("tvocCritical").value=threshold.tvocCritical;
-
-document.getElementById("pmWarn").value=threshold.pmWarn;
-document.getElementById("pmCritical").value=threshold.pmCritical;
-
-document.getElementById("tempWarn").value=threshold.tempWarn;
-document.getElementById("tempCritical").value=threshold.tempCritical;
-
-document.getElementById("humWarn").value=threshold.humWarn;
-document.getElementById("humCritical").value=threshold.humCritical;
+return "SAFE";
 
 }
 
-loadThresholds();
+if(value<=warning){
 
-/*==================================
-SAVE SETTINGS
-==================================*/
+return "WARNING";
 
-document.getElementById("applySettings").onclick=function(){
+}
 
-threshold.co2Warn=Number(document.getElementById("co2Warn").value);
-threshold.co2Critical=Number(document.getElementById("co2Critical").value);
+return "CRITICAL";
 
-threshold.nh3Warn=Number(document.getElementById("nh3Warn").value);
-threshold.nh3Critical=Number(document.getElementById("nh3Critical").value);
+}
 
-threshold.h2sWarn=Number(document.getElementById("h2sWarn").value);
-threshold.h2sCritical=Number(document.getElementById("h2sCritical").value);
+/*=========================================
+CARD COLOR UPDATE
+=========================================*/
 
-threshold.tvocWarn=Number(document.getElementById("tvocWarn").value);
-threshold.tvocCritical=Number(document.getElementById("tvocCritical").value);
+function setCard(card,status,label){
 
-threshold.pmWarn=Number(document.getElementById("pmWarn").value);
-threshold.pmCritical=Number(document.getElementById("pmCritical").value);
+card.classList.remove(
 
-threshold.tempWarn=Number(document.getElementById("tempWarn").value);
-threshold.tempCritical=Number(document.getElementById("tempCritical").value);
+"green",
 
-threshold.humWarn=Number(document.getElementById("humWarn").value);
-threshold.humCritical=Number(document.getElementById("humCritical").value);
+"yellow",
 
-alert("Thresholds Updated Successfully.");
+"red"
 
-};
+);
 
-/*==================================
+if(status=="SAFE"){
+
+card.classList.add("green");
+
+label.innerHTML="SAFE";
+
+}
+
+else if(status=="WARNING"){
+
+card.classList.add("yellow");
+
+label.innerHTML="WARNING";
+
+}
+
+else{
+
+card.classList.add("red");
+
+label.innerHTML="CRITICAL";
+
+}
+
+}
+
+/*=========================================
+UPDATE SENSOR LEVELS
+=========================================*/
+
+function updateLevels(){
+
+const co2=Number(co2Input.value);
+
+const nh3=Number(nh3Input.value);
+
+const h2s=Number(h2sInput.value);
+
+const tvoc=Number(tvocInput.value);
+
+const pm=Number(pmInput.value);
+
+const temp=Number(tempInput.value);
+
+const hum=Number(humidityInput.value);
+
+setCard(
+
+co2Card,
+
+getLevel(co2,limits.co2.safe,limits.co2.warning),
+
+co2Status
+
+);
+
+setCard(
+
+nh3Card,
+
+getLevel(nh3,limits.nh3.safe,limits.nh3.warning),
+
+nh3Status
+
+);
+
+setCard(
+
+h2sCard,
+
+getLevel(h2s,limits.h2s.safe,limits.h2s.warning),
+
+h2sStatus
+
+);
+
+setCard(
+
+tvocCard,
+
+getLevel(tvoc,limits.tvoc.safe,limits.tvoc.warning),
+
+tvocStatus
+
+);
+
+setCard(
+
+pmCard,
+
+getLevel(pm,limits.pm.safe,limits.pm.warning),
+
+pmStatus
+
+);
+
+setCard(
+
+tempCard,
+
+getLevel(temp,limits.temp.safe,limits.temp.warning),
+
+tempStatus
+
+);
+
+setCard(
+
+humidityCard,
+
+getLevel(hum,limits.humidity.safe,limits.humidity.warning),
+
+humidityStatus
+
+);
+
+}
+
+/*=========================================
+HEALTH SCORE
+=========================================*/
+
+function updateHealth(){
+
+let health=100;
+
+if(co2Status.innerHTML=="WARNING") health-=8;
+if(co2Status.innerHTML=="CRITICAL") health-=20;
+
+if(nh3Status.innerHTML=="WARNING") health-=8;
+if(nh3Status.innerHTML=="CRITICAL") health-=20;
+
+if(h2sStatus.innerHTML=="WARNING") health-=8;
+if(h2sStatus.innerHTML=="CRITICAL") health-=20;
+
+if(tvocStatus.innerHTML=="WARNING") health-=6;
+if(tvocStatus.innerHTML=="CRITICAL") health-=12;
+
+if(pmStatus.innerHTML=="WARNING") health-=6;
+if(pmStatus.innerHTML=="CRITICAL") health-=12;
+
+if(tempStatus.innerHTML=="WARNING") health-=5;
+if(tempStatus.innerHTML=="CRITICAL") health-=10;
+
+if(humidityStatus.innerHTML=="WARNING") health-=5;
+if(humidityStatus.innerHTML=="CRITICAL") health-=10;
+
+if(health<0){
+
+health=0;
+
+}
+
+healthScore.innerHTML=health+"%";
+
+summaryHealth.innerHTML=health+"%";
+
+overallHealth.innerHTML=health+"%";
+
+aiHealthScore.innerHTML=health+"%";
+
+}
+
+/*=========================================
 AI ENGINE
-==================================*/
+=========================================*/
 
 function updateAI(){
 
-let co2=parseInt(document.getElementById("co2Value").innerHTML);
+let overall="SAFE";
 
-let nh3=parseInt(document.getElementById("nh3Value").innerHTML);
+let recommendation=
 
-let h2s=parseInt(document.getElementById("h2sValue").innerHTML);
+"Environment is healthy. Continue regular monitoring.";
 
-let status="SAFE";
+let prediction=
 
-let color="#2ECC71";
+"No environmental risk predicted.";
 
-let health=96;
+let alerts=0;
 
-let recommendation="Continue Routine Monitoring.";
+document.querySelectorAll(".sensor-card span").forEach(function(item){
 
-if(
-co2>threshold.co2Warn||
-nh3>threshold.nh3Warn||
-h2s>threshold.h2sWarn
-){
+if(item.innerHTML=="WARNING"){
 
-status="WARNING";
+overall="WARNING";
 
-color="#F39C12";
-
-health=82;
-
-recommendation="Increase ventilation and inspect the facility.";
+alerts++;
 
 }
 
-if(
-co2>threshold.co2Critical||
-nh3>threshold.nh3Critical||
-h2s>threshold.h2sCritical
-){
+if(item.innerHTML=="CRITICAL"){
 
-status="CRITICAL";
+overall="CRITICAL";
 
-color="#E74C3C";
-
-health=58;
-
-recommendation="Immediate inspection required. Restrict access until environmental conditions improve.";
+alerts++;
 
 }
 
-document.getElementById("predictionValue").innerHTML=status;
+});
 
-document.getElementById("predictionText").innerHTML=status;
+overallStatus.innerHTML=overall;
 
-document.getElementById("healthScore").innerHTML=health+"%";
+summaryStatus.innerHTML=overall;
 
-document.getElementById("healthFill").style.width=health+"%";
+predictionValue.innerHTML=overall;
 
-document.getElementById("healthFill").innerHTML=health+"%";
+predictionLevel.innerHTML=overall;
 
-document.getElementById("assessment").innerHTML=recommendation;
+summaryAlert.innerHTML=alerts;
 
-document.getElementById("riskScore").innerHTML=status;
+alerts.innerHTML=alerts;
 
-document.getElementById("riskStatus").innerHTML=status;
+if(overall=="WARNING"){
 
-document.getElementById("aiScore").innerHTML=health+"%";
+recommendation=
 
-document.getElementById("rec1").innerHTML=recommendation;
+"Increase ventilation. Inspect the surrounding area.";
+
+prediction=
+
+"Environmental quality may deteriorate within 30 minutes.";
 
 }
 
-/*==================================
-AUTO AI UPDATE
-==================================*/
+if(overall=="CRITICAL"){
 
-setInterval(updateAI,2000);
+recommendation=
 
-/*==================================
-DEMO BUTTONS
-==================================*/
+"Immediate action required. Restrict access and notify maintenance team.";
 
-document.querySelector(".normal").onclick=function(){
+prediction=
 
-document.getElementById("co2Value").innerHTML=520;
-document.getElementById("nh3Value").innerHTML=12;
-document.getElementById("h2sValue").innerHTML=2;
+"Hazardous conditions detected. Emergency response recommended.";
 
-updateAI();
+}
 
-};
+recommendationText.innerHTML=recommendation;
 
-document.querySelector(".warning").onclick=function(){
+predictionMessage.innerHTML=prediction;
 
-document.getElementById("co2Value").innerHTML=850;
-document.getElementById("nh3Value").innerHTML=32;
-document.getElementById("h2sValue").innerHTML=6;
+assessment.innerHTML=recommendation;
 
-updateAI();
+summaryPrediction.innerHTML=prediction;
 
-};
+}
 
-document.querySelector(".critical").onclick=function(){
+/*=========================================
+CONSOLE
+=========================================*/
 
-document.getElementById("co2Value").innerHTML=1250;
-document.getElementById("nh3Value").innerHTML=58;
-document.getElementById("h2sValue").innerHTML=12;
+console.log(
 
-updateAI();
+"AI Decision Engine Loaded"
 
-};
-
-document.querySelector(".custom").onclick=function(){
-
-alert("Custom Demo Mode Enabled");
-
-};
+);
 /*==================================================
-SCRIPT.JS PART 3
-Professional Charts
+SCRIPT.JS V3
+PART 3
+Live Chart
+Gauge
+SMS
+Email
+WhatsApp
 ==================================================*/
 
-/* ================================
-CHART INITIALIZATION
-================================ */
+/*=========================================
+LIVE CHART
+=========================================*/
 
-const trendCtx = document.getElementById("trendChart").getContext("2d");
+const chartCTX=document.getElementById("trendChart").getContext("2d");
 
-const trendChart = new Chart(trendCtx,{
+const trendChart=new Chart(chartCTX,{
 
 type:"line",
 
 data:{
 
-labels:["10:00","10:05","10:10","10:15","10:20","10:25"],
+labels:[],
 
 datasets:[
 
 {
 
-label:"CO₂ (ppm)",
+label:"CO₂",
 
-data:[520,530,545,560,550,570],
+data:[],
 
-borderColor:"#00B050",
+borderColor:"#00C853",
 
-backgroundColor:"rgba(0,176,80,0.15)",
-
-borderWidth:3,
+backgroundColor:"rgba(0,200,83,.15)",
 
 fill:true,
 
-tension:.4
+tension:.4,
+
+borderWidth:3
 
 },
 
 {
 
-label:"NH₃ (ppm)",
+label:"NH₃",
 
-data:[10,11,12,13,14,15],
+data:[],
 
-borderColor:"#F39C12",
+borderColor:"#FF9800",
 
-backgroundColor:"rgba(243,156,18,.15)",
-
-borderWidth:3,
+backgroundColor:"rgba(255,152,0,.15)",
 
 fill:true,
 
-tension:.4
+tension:.4,
+
+borderWidth:3
+
+},
+
+{
+
+label:"H₂S",
+
+data:[],
+
+borderColor:"#F44336",
+
+backgroundColor:"rgba(244,67,54,.15)",
+
+fill:true,
+
+tension:.4,
+
+borderWidth:3
 
 }
 
@@ -559,29 +606,21 @@ responsive:true,
 
 maintainAspectRatio:false,
 
-interaction:{
-
-mode:'index',
-
-intersect:false
-
-},
-
 plugins:{
 
 legend:{
 
-position:'top'
+position:"top"
+
+}
 
 },
 
-title:{
+interaction:{
 
-display:true,
+mode:"index",
 
-text:'Live Environmental Analysis'
-
-}
+intersect:false
 
 },
 
@@ -599,31 +638,31 @@ beginAtZero:true
 
 });
 
-/* ================================
-LIVE CHART UPDATE
-================================ */
+/*=========================================
+UPDATE CHART
+=========================================*/
 
-function updateLiveChart(){
+function updateChart(){
 
-const time=new Date().toLocaleTimeString([],{
+let time=new Date().toLocaleTimeString([],{
 
-hour:'2-digit',
+hour:"2-digit",
 
-minute:'2-digit'
+minute:"2-digit",
+
+second:"2-digit"
 
 });
 
-const co2=parseInt(document.getElementById("co2Value").innerHTML);
-
-const nh3=parseInt(document.getElementById("nh3Value").innerHTML);
-
 trendChart.data.labels.push(time);
 
-trendChart.data.datasets[0].data.push(co2);
+trendChart.data.datasets[0].data.push(Number(co2Input.value));
 
-trendChart.data.datasets[1].data.push(nh3);
+trendChart.data.datasets[1].data.push(Number(nh3Input.value));
 
-if(trendChart.data.labels.length>12){
+trendChart.data.datasets[2].data.push(Number(h2sInput.value));
+
+if(trendChart.data.labels.length>20){
 
 trendChart.data.labels.shift();
 
@@ -631,337 +670,328 @@ trendChart.data.datasets[0].data.shift();
 
 trendChart.data.datasets[1].data.shift();
 
+trendChart.data.datasets[2].data.shift();
+
 }
 
 trendChart.update();
 
 }
 
-setInterval(updateLiveChart,3000);
+/*=========================================
+CLEAR CHART
+=========================================*/
 
-/* ================================
-GAUGES
-================================ */
+document.getElementById("clearChart").onclick=function(){
 
-function gauge(id,color,value){
+trendChart.data.labels=[];
 
-return new Chart(
+trendChart.data.datasets.forEach(function(ds){
 
-document.getElementById(id),
+ds.data=[];
 
-{
+});
 
-type:"doughnut",
+trendChart.update();
 
-data:{
+};
 
-labels:["Value","Remaining"],
+/*=========================================
+GAUGE UPDATE
+=========================================*/
 
-datasets:[{
+function updateGauge(){
 
-data:[value,100-value],
+co2GaugeValue.innerHTML=co2Input.value+" ppm";
 
-backgroundColor:[color,"#E5E7EB"],
+nh3GaugeValue.innerHTML=nh3Input.value+" ppm";
 
-borderWidth:0
-
-}]
-
-},
-
-options:{
-
-cutout:"78%",
-
-plugins:{
-
-legend:{display:false},
-
-tooltip:{enabled:false}
+h2sGaugeValue.innerHTML=h2sInput.value+" ppm";
 
 }
 
-}
-
-}
-
-);
-
-}
-
-const co2Gauge=gauge("co2Gauge","#00B050",60);
-
-const nh3Gauge=gauge("nh3Gauge","#F39C12",25);
-
-const h2sGauge=gauge("h2sGauge","#E74C3C",15);
-
-const aqiGauge=gauge("aqiGauge","#1565C0",92);
-
-/* ================================
-UPDATE GAUGES
-================================ */
-
-function updateGaugeValues(){
-
-const co2=parseInt(document.getElementById("co2Value").innerHTML);
-
-const nh3=parseInt(document.getElementById("nh3Value").innerHTML);
-
-const h2s=parseInt(document.getElementById("h2sValue").innerHTML);
-
-let health=parseInt(document.getElementById("healthScore").innerHTML);
-
-co2Gauge.data.datasets[0].data=[Math.min(co2/15,100),100-Math.min(co2/15,100)];
-
-nh3Gauge.data.datasets[0].data=[Math.min(nh3*2,100),100-Math.min(nh3*2,100)];
-
-h2sGauge.data.datasets[0].data=[Math.min(h2s*8,100),100-Math.min(h2s*8,100)];
-
-aqiGauge.data.datasets[0].data=[health,100-health];
-
-co2Gauge.update();
-
-nh3Gauge.update();
-
-h2sGauge.update();
-
-aqiGauge.update();
-
-}
-
-setInterval(updateGaugeValues,2500);
-
-/* ================================
-SMS UPDATE
-================================ */
+/*=========================================
+SMS
+=========================================*/
 
 function updateSMS(){
 
-document.getElementById("smsMessage").value=
+smsMessage.value=
 
-`KatrU Lite ALERT
+`🚨 KatrU Lite Environmental Alert
 
-Facility : ${document.getElementById("facilityName").value}
+Facility : ${facilityName.value}
 
-Status : ${document.getElementById("predictionValue").innerHTML}
+Status : ${overallStatus.innerHTML}
 
-CO₂ : ${document.getElementById("co2Value").innerHTML} ppm
+CO₂ : ${co2Input.value} ppm
 
-NH₃ : ${document.getElementById("nh3Value").innerHTML} ppm
+NH₃ : ${nh3Input.value} ppm
 
-H₂S : ${document.getElementById("h2sValue").innerHTML} ppm
+H₂S : ${h2sInput.value} ppm
 
-Health Score : ${document.getElementById("healthScore").innerHTML}
+Health Score : ${healthScore.innerHTML}
 
-Generated : ${new Date().toLocaleTimeString()}`;
+Recommendation
+
+${recommendationText.innerHTML}
+
+Generated
+
+${new Date().toLocaleTimeString()}`;
 
 }
 
-setInterval(updateSMS,3000);
+/*=========================================
+EMAIL
+=========================================*/
 
-/* ================================
+function updateEmail(){
+
+emailSubject.value=
+
+overallStatus.innerHTML+
+
+" Environmental Alert";
+
+emailMessage.value=
+
+`Dear Officer,
+
+Facility
+
+${facilityName.value}
+
+Current Status
+
+${overallStatus.innerHTML}
+
+CO₂ : ${co2Input.value} ppm
+
+NH₃ : ${nh3Input.value} ppm
+
+H₂S : ${h2sInput.value} ppm
+
+Health Score
+
+${healthScore.innerHTML}
+
+AI Recommendation
+
+${recommendationText.innerHTML}
+
+Generated Automatically by KatrU Lite AI Platform.`;
+
+}
+
+/*=========================================
+WHATSAPP
+=========================================*/
+
+function updateWhatsApp(){
+
+whatsappMessage.value=
+
+`🚨 KATRU LITE
+
+Facility : ${facilityName.value}
+
+Status : ${overallStatus.innerHTML}
+
+CO₂ : ${co2Input.value}
+
+NH₃ : ${nh3Input.value}
+
+H₂S : ${h2sInput.value}
+
+Health : ${healthScore.innerHTML}
+
+${recommendationText.innerHTML}`;
+
+}
+
+/*=========================================
 ALERT HISTORY
-================================ */
+=========================================*/
 
-function addAlert(){
+function updateAlertHistory(){
 
-const table=document.getElementById("alertHistory");
+if(overallStatus.innerHTML=="SAFE") return;
 
-const row=table.insertRow(0);
+let row=document.createElement("tr");
 
 row.innerHTML=`
 
 <td>${new Date().toLocaleTimeString()}</td>
 
-<td>${document.getElementById("facilityName").value}</td>
+<td>${facilityName.value}</td>
 
-<td>CO₂</td>
+<td>Environmental</td>
 
-<td>${document.getElementById("co2Value").innerHTML} ppm</td>
+<td>${overallStatus.innerHTML}</td>
 
-<td><span class="warning-badge">Updated</span></td>
+<td>
 
-<td>AI analysis completed</td>
+<span class="${overallStatus.innerHTML=="CRITICAL"?"red-tag":"yellow-tag"}">
+
+${overallStatus.innerHTML}
+
+</span>
+
+</td>
+
+<td>
+
+${recommendationText.innerHTML}
+
+</td>
 
 `;
 
-if(table.rows.length>10){
+alertHistory.prepend(row);
 
-table.deleteRow(10);
+if(alertHistory.rows.length>15){
+
+alertHistory.deleteRow(15);
 
 }
 
 }
 
-setInterval(addAlert,15000);
+/*=========================================
+COPY BUTTONS
+=========================================*/
 
-/* ================================
-COPY SMS
-================================ */
+copySMS.onclick=function(){
 
-document.getElementById("copySMS").onclick=function(){
+navigator.clipboard.writeText(smsMessage.value);
 
-navigator.clipboard.writeText(
-
-document.getElementById("smsMessage").value
-
-);
-
-alert("SMS copied successfully.");
+alert("SMS Copied");
 
 };
 
-/* ================================
-SMS PREVIEW
-================================ */
+copyEmail.onclick=function(){
 
-document.getElementById("previewSMS").onclick=function(){
+navigator.clipboard.writeText(emailMessage.value);
 
-alert(document.getElementById("smsMessage").value);
+alert("Email Copied");
 
 };
 
-console.log("Charts Loaded Successfully");
+copyWhatsApp.onclick=function(){
+
+navigator.clipboard.writeText(whatsappMessage.value);
+
+alert("WhatsApp Message Copied");
+
+};
+
+console.log("Chart + Notification Engine Loaded");
 /*==================================================
-SCRIPT.JS PART 4
-Reports
+SCRIPT.JS V3
+PART 4
+PDF
+CSV
 Dark Mode
+Presentation
 Auto Demo
-Device Health
-Dashboard Actions
 ==================================================*/
 
-/*==================================
-AUTO DEMO
-==================================*/
-
-document.getElementById("startDemo").onclick=function(){
-
-normalDemo();
-
-setTimeout(warningDemo,10000);
-
-setTimeout(criticalDemo,20000);
-
-setTimeout(normalDemo,30000);
-
-};
-
-function normalDemo(){
-
-document.querySelector(".normal").click();
-
-}
-
-function warningDemo(){
-
-document.querySelector(".warning").click();
-
-}
-
-function criticalDemo(){
-
-document.querySelector(".critical").click();
-
-}
-
-/*==================================
-DEVICE HEALTH
-==================================*/
-
-function updateDeviceHealth(){
-
-let cpu=Math.floor(Math.random()*35)+20;
-
-let memory=Math.floor(Math.random()*30)+40;
-
-let storage=Math.floor(Math.random()*20)+15;
-
-document.querySelectorAll(".progress-fill")[0].style.width=cpu+"%";
-
-document.querySelectorAll(".progress-fill")[0].innerHTML=cpu+"%";
-
-document.querySelectorAll(".progress-fill")[1].style.width=memory+"%";
-
-document.querySelectorAll(".progress-fill")[1].innerHTML=memory+"%";
-
-document.querySelectorAll(".progress-fill")[2].style.width=storage+"%";
-
-document.querySelectorAll(".progress-fill")[2].innerHTML=storage+"%";
-
-document.getElementById("lastSync").innerHTML=
-
-new Date().toLocaleTimeString();
-
-}
-
-setInterval(updateDeviceHealth,5000);
-
-/*==================================
-REPORT BUTTONS
-==================================*/
+/*=========================================
+PDF REPORT
+=========================================*/
 
 document.getElementById("pdfReport").onclick=function(){
 
-alert("Generating Environmental PDF Report...");
+const { jsPDF }=window.jspdf;
+
+const pdf=new jsPDF();
+
+pdf.setFontSize(22);
+
+pdf.text("KatrU Lite Environmental Report",20,20);
+
+pdf.setFontSize(12);
+
+pdf.text("Facility : "+facilityName.value,20,40);
+
+pdf.text("Status : "+overallStatus.innerHTML,20,50);
+
+pdf.text("Health Score : "+healthScore.innerHTML,20,60);
+
+pdf.text("CO₂ : "+co2Input.value+" ppm",20,80);
+
+pdf.text("NH₃ : "+nh3Input.value+" ppm",20,90);
+
+pdf.text("H₂S : "+h2sInput.value+" ppm",20,100);
+
+pdf.text("TVOC : "+tvocInput.value+" ppb",20,110);
+
+pdf.text("PM2.5 : "+pmInput.value+" ug/m3",20,120);
+
+pdf.text("Temperature : "+tempInput.value+" °C",20,130);
+
+pdf.text("Humidity : "+humidityInput.value+" %",20,140);
+
+pdf.text("AI Recommendation",20,165);
+
+pdf.text(recommendationText.innerHTML,20,175);
+
+pdf.save("KatruLite_Report.pdf");
 
 };
 
-document.getElementById("excelReport").onclick=function(){
-
-alert("Exporting Excel File...");
-
-};
+/*=========================================
+CSV EXPORT
+=========================================*/
 
 document.getElementById("csvReport").onclick=function(){
 
-alert("Downloading CSV Data...");
+let csv=
+
+`Facility,Status,CO2,NH3,H2S,TVOC,PM2.5,Temperature,Humidity
+
+${facilityName.value},
+
+${overallStatus.innerHTML},
+
+${co2Input.value},
+
+${nh3Input.value},
+
+${h2sInput.value},
+
+${tvocInput.value},
+
+${pmInput.value},
+
+${tempInput.value},
+
+${humidityInput.value}`;
+
+const blob=new Blob([csv],{
+
+type:"text/csv"
+
+});
+
+const link=document.createElement("a");
+
+link.href=URL.createObjectURL(blob);
+
+link.download="KatruLite_Data.csv";
+
+link.click();
 
 };
 
-document.getElementById("analytics").onclick=function(){
-
-alert("Opening Analytics Dashboard...");
-
-};
-
-/*==================================
-QUICK ACTIONS
-==================================*/
-
-document.getElementById("refreshDashboard").onclick=function(){
-
-location.reload();
-
-};
-
-document.getElementById("downloadReport").onclick=function(){
-
-alert("Environmental Report Download Started.");
-
-};
-
-document.getElementById("shareDashboard").onclick=function(){
-
-navigator.clipboard.writeText(window.location.href);
-
-alert("Dashboard Link Copied.");
-
-};
-
-document.getElementById("systemLogs").onclick=function(){
-
-alert("System running normally.\nNo critical logs.");
-
-};
-
-/*==================================
+/*=========================================
 DARK MODE
-==================================*/
+=========================================*/
 
 let dark=false;
 
-document.getElementById("toggleTheme").onclick=function(){
+toggleTheme.onclick=function(){
 
 dark=!dark;
 
@@ -983,121 +1013,289 @@ this.innerHTML="🌙 Dark Mode";
 
 };
 
-/*==================================
-KEYBOARD SHORTCUTS
-==================================*/
+/*=========================================
+FULL SCREEN
+=========================================*/
 
-document.addEventListener("keydown",function(e){
+fullscreen.onclick=function(){
 
-if(e.key==="1"){
+if(!document.fullscreenElement){
 
-normalDemo();
-
-}
-
-if(e.key==="2"){
-
-warningDemo();
+document.documentElement.requestFullscreen();
 
 }
 
-if(e.key==="3"){
+else{
 
-criticalDemo();
+document.exitFullscreen();
+
+}
+
+};
+
+/*=========================================
+PRESENTATION MODE
+=========================================*/
+
+presentationMode.onclick=function(){
+
+document.documentElement.requestFullscreen();
+
+document.body.classList.add("presentation");
+
+alert(
+
+"Presentation Mode Enabled"
+
+);
+
+};
+
+/*=========================================
+AUTO DEMO
+=========================================*/
+
+let demoRunning=false;
+
+let timer;
+
+autoDemo.onclick=function(){
+
+if(!demoRunning){
+
+demoRunning=true;
+
+this.innerHTML="Stop Demo";
+
+timer=setInterval(function(){
+
+co2Input.value=Math.floor(Math.random()*1300)+350;
+
+nh3Input.value=Math.floor(Math.random()*65);
+
+h2sInput.value=Math.floor(Math.random()*15);
+
+tvocInput.value=Math.floor(Math.random()*650);
+
+pmInput.value=Math.floor(Math.random()*90);
+
+tempInput.value=Math.floor(Math.random()*18)+22;
+
+humidityInput.value=Math.floor(Math.random()*45)+45;
+
+updateDashboard();
+
+},2500);
 
 }
 
-if(e.key==="d"){
+else{
 
-document.getElementById("toggleTheme").click();
+demoRunning=false;
+
+clearInterval(timer);
+
+this.innerHTML="Auto Demo";
 
 }
+
+};
+
+/*=========================================
+REFRESH
+=========================================*/
+
+refreshDashboard.onclick=function(){
+
+location.reload();
+
+};
+
+/*=========================================
+DOWNLOAD DASHBOARD IMAGE
+=========================================*/
+
+downloadDashboard.onclick=function(){
+
+html2canvas(document.body).then(function(canvas){
+
+let link=document.createElement("a");
+
+link.download="KatruLite_Dashboard.png";
+
+link.href=canvas.toDataURL();
+
+link.click();
 
 });
 
-/*==================================
+};
+
+/*=========================================
+SHARE
+=========================================*/
+
+shareDashboard.onclick=function(){
+
+navigator.clipboard.writeText(window.location.href);
+
+alert("Dashboard Link Copied");
+
+};
+
+/*=========================================
 SAVE SETTINGS
-==================================*/
+=========================================*/
 
 function saveDashboard(){
 
+const dashboard={
+
+facility:facilityName.value,
+
+co2:co2Input.value,
+
+nh3:nh3Input.value,
+
+h2s:h2sInput.value,
+
+tvoc:tvocInput.value,
+
+pm:pmInput.value,
+
+temp:tempInput.value,
+
+humidity:humidityInput.value
+
+};
+
 localStorage.setItem(
 
-"KatrULiteThreshold",
+"KatruLiteDashboard",
 
-JSON.stringify(threshold)
+JSON.stringify(dashboard)
 
 );
 
 }
 
+/*=========================================
+LOAD SETTINGS
+=========================================*/
+
 function loadDashboard(){
 
-let data=
+const data=
+
+JSON.parse(
 
 localStorage.getItem(
 
-"KatrULiteThreshold"
+"KatruLiteDashboard"
+
+)
 
 );
 
 if(data){
 
-threshold=JSON.parse(data);
+facilityName.value=data.facility;
 
-loadThresholds();
+co2Input.value=data.co2;
+
+nh3Input.value=data.nh3;
+
+h2sInput.value=data.h2s;
+
+tvocInput.value=data.tvoc;
+
+pmInput.value=data.pm;
+
+tempInput.value=data.temp;
+
+humidityInput.value=data.humidity;
+
+updateDashboard();
 
 }
 
 }
 
-document.getElementById("applySettings").addEventListener(
+window.addEventListener(
 
-"click",
+"beforeunload",
 
 saveDashboard
 
 );
 
-loadDashboard();
+window.addEventListener(
 
-/*==================================
-SYSTEM STATUS
-==================================*/
+"load",
 
-setInterval(function(){
-
-console.log(
-
-"KatrU Lite Dashboard Running..."
+loadDashboard
 
 );
 
-},10000);
+/*=========================================
+KEYBOARD SHORTCUTS
+=========================================*/
 
-/*==================================
-WELCOME
-==================================*/
+document.addEventListener("keydown",function(e){
+
+if(e.key==="F5"){
+
+e.preventDefault();
+
+updateDashboard();
+
+}
+
+if(e.key==="F11"){
+
+e.preventDefault();
+
+fullscreen.click();
+
+}
+
+if(e.key==="Escape"){
+
+document.body.classList.remove("presentation");
+
+}
+
+});
+
+/*=========================================
+SYSTEM MONITOR
+=========================================*/
+
+setInterval(function(){
+
+document.getElementById("lastUpdated").innerHTML=
+
+new Date().toLocaleTimeString();
+
+},1000);
+
+/*=========================================
+READY
+=========================================*/
 
 console.clear();
 
 console.log(
 
-"%cKatrU Lite V2",
+"%cKatrU Lite Enterprise Dashboard Ready",
 
-"font-size:28px;color:#1565C0;font-weight:bold"
-
-);
-
-console.log(
-
-"AI + IoT Environmental Monitoring Platform"
+"font-size:22px;color:#1565C0;font-weight:bold"
 
 );
 
 console.log(
 
-"Prototype Status : TRL-4"
+"AI Environmental Monitoring Platform"
 
 );
 
@@ -1106,306 +1304,3 @@ console.log(
 "Developed by JWorks"
 
 );
-/*==================================================
-SCRIPT.JS PART 5
-Enterprise AI
-Presentation Mode
-Notifications
-Final Dashboard Engine
-==================================================*/
-
-/*==================================
-LIVE NOTIFICATION
-==================================*/
-
-function showNotification(title,message,color="#1565C0"){
-
-const notify=document.createElement("div");
-
-notify.className="notification";
-
-notify.style.background=color;
-
-notify.innerHTML=`
-
-<h4>${title}</h4>
-
-<p>${message}</p>
-
-`;
-
-document.body.appendChild(notify);
-
-setTimeout(()=>{
-
-notify.style.right="20px";
-
-},100);
-
-setTimeout(()=>{
-
-notify.style.right="-420px";
-
-},4500);
-
-setTimeout(()=>{
-
-notify.remove();
-
-},5200);
-
-}
-
-/*==================================
-PRESENTATION MODE
-==================================*/
-
-document.getElementById("startDemo").addEventListener("click",()=>{
-
-showNotification(
-
-"Presentation Mode",
-
-"Running KatrU Lite Live Demo"
-
-);
-
-});
-
-/*==================================
-AI FORECAST
-==================================*/
-
-function aiForecast(){
-
-let co2=parseInt(document.getElementById("co2Value").innerHTML);
-
-let nh3=parseInt(document.getElementById("nh3Value").innerHTML);
-
-let h2s=parseInt(document.getElementById("h2sValue").innerHTML);
-
-let msg="Environment Stable";
-
-if(co2>800){
-
-msg="CO₂ expected to increase in the next 20 minutes.";
-
-}
-
-if(nh3>30){
-
-msg="NH₃ concentration may exceed safe limits.";
-
-}
-
-if(h2s>6){
-
-msg="Hydrogen Sulphide risk detected.";
-
-}
-
-document.getElementById("predictionText").innerHTML=msg;
-
-}
-
-setInterval(aiForecast,5000);
-
-/*==================================
-SYSTEM UPTIME
-==================================*/
-
-let seconds=0;
-
-setInterval(()=>{
-
-seconds++;
-
-let hrs=Math.floor(seconds/3600);
-
-let mins=Math.floor((seconds%3600)/60);
-
-let sec=seconds%60;
-
-console.log(
-
-"System Uptime : "+
-
-hrs+"h "+mins+"m "+sec+"s"
-
-);
-
-},1000);
-
-/*==================================
-HEALTH COLOR
-==================================*/
-
-function updateHealthColor(){
-
-let health=parseInt(
-
-document.getElementById("healthScore").innerHTML
-
-);
-
-let bar=document.getElementById("healthFill");
-
-if(health>=90){
-
-bar.style.background="#2ECC71";
-
-}
-
-else if(health>=70){
-
-bar.style.background="#F39C12";
-
-}
-
-else{
-
-bar.style.background="#E74C3C";
-
-}
-
-}
-
-setInterval(updateHealthColor,1000);
-
-/*==================================
-AUTO SAVE
-==================================*/
-
-setInterval(()=>{
-
-localStorage.setItem(
-
-"KatrULiteDashboard",
-
-JSON.stringify({
-
-co2:document.getElementById("co2Value").innerHTML,
-
-nh3:document.getElementById("nh3Value").innerHTML,
-
-h2s:document.getElementById("h2sValue").innerHTML,
-
-health:document.getElementById("healthScore").innerHTML,
-
-time:new Date().toLocaleString()
-
-})
-
-);
-
-},10000);
-
-/*==================================
-LOAD LAST SESSION
-==================================*/
-
-window.onload=function(){
-
-let data=
-
-localStorage.getItem("KatrULiteDashboard");
-
-if(data){
-
-console.log("Previous session restored.");
-
-}
-
-showNotification(
-
-"KatrU Lite",
-
-"Enterprise Dashboard Loaded Successfully",
-
-"#2ECC71"
-
-);
-
-};
-
-/*==================================
-FULL SCREEN MODE
-==================================*/
-
-document.addEventListener("keydown",(e)=>{
-
-if(e.key==="F11"){
-
-document.documentElement.requestFullscreen();
-
-}
-
-});
-
-/*==================================
-RANDOM AI INSIGHTS
-==================================*/
-
-const insights=[
-
-"Air quality is within acceptable limits.",
-
-"Schedule preventive maintenance this week.",
-
-"Ventilation performance is optimal.",
-
-"Sensor calibration recommended after 30 days.",
-
-"No abnormal environmental trend detected.",
-
-"Historical analysis indicates stable conditions."
-
-];
-
-setInterval(()=>{
-
-let r=Math.floor(Math.random()*insights.length);
-
-document.getElementById("assessment").innerHTML=
-
-insights[r];
-
-},7000);
-
-/*==================================
-LIVE STATUS
-==================================*/
-
-setInterval(()=>{
-
-document.getElementById("alerts").innerHTML=
-
-Math.floor(Math.random()*4);
-
-},8000);
-
-/*==================================
-LOADING COMPLETE
-==================================*/
-
-console.log(
-
-"%cKatrU Lite Enterprise Dashboard Ready",
-
-"color:#2ECC71;font-size:22px;font-weight:bold"
-
-);
-
-showNotification(
-
-"System Ready",
-
-"AI + IoT Monitoring Platform Online",
-
-"#1565C0"
-
-);
-
-/*==================================
-END OF SCRIPT
-==================================================*/
