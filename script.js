@@ -494,39 +494,36 @@ alert("Custom Demo Mode Enabled");
 };
 /*==================================================
 SCRIPT.JS PART 3
-Charts
-Gauges
-Alert Timeline
-SMS & Email Engine
+Professional Charts
 ==================================================*/
 
-/*==================================
-LIVE TREND CHART
-==================================*/
+/* ================================
+CHART INITIALIZATION
+================================ */
 
-const trendChart=new Chart(
+const trendCtx = document.getElementById("trendChart").getContext("2d");
 
-document.getElementById("trendChart"),
-
-{
+const trendChart = new Chart(trendCtx,{
 
 type:"line",
 
 data:{
 
-labels:["10:00","10:10","10:20","10:30","10:40","10:50"],
+labels:["10:00","10:05","10:10","10:15","10:20","10:25"],
 
 datasets:[
 
 {
 
-label:"CO₂",
+label:"CO₂ (ppm)",
 
-data:[520,540,550,570,560,580],
+data:[520,530,545,560,550,570],
 
-borderColor:"#2ECC71",
+borderColor:"#00B050",
 
-backgroundColor:"rgba(46,204,113,.15)",
+backgroundColor:"rgba(0,176,80,0.15)",
+
+borderWidth:3,
 
 fill:true,
 
@@ -536,13 +533,15 @@ tension:.4
 
 {
 
-label:"NH₃",
+label:"NH₃ (ppm)",
 
-data:[10,12,13,14,15,16],
+data:[10,11,12,13,14,15],
 
 borderColor:"#F39C12",
 
 backgroundColor:"rgba(243,156,18,.15)",
+
+borderWidth:3,
 
 fill:true,
 
@@ -560,11 +559,37 @@ responsive:true,
 
 maintainAspectRatio:false,
 
+interaction:{
+
+mode:'index',
+
+intersect:false
+
+},
+
 plugins:{
 
 legend:{
 
-position:"top"
+position:'top'
+
+},
+
+title:{
+
+display:true,
+
+text:'Live Environmental Analysis'
+
+}
+
+},
+
+scales:{
+
+y:{
+
+beginAtZero:true
 
 }
 
@@ -572,29 +597,33 @@ position:"top"
 
 }
 
-}
+});
 
-/*==================================
-UPDATE LIVE CHART
-==================================*/
+/* ================================
+LIVE CHART UPDATE
+================================ */
 
-function updateChart(){
+function updateLiveChart(){
 
-let co2=parseInt(document.getElementById("co2Value").innerHTML);
+const time=new Date().toLocaleTimeString([],{
 
-let nh3=parseInt(document.getElementById("nh3Value").innerHTML);
+hour:'2-digit',
 
-trendChart.data.labels.push(
+minute:'2-digit'
 
-new Date().toLocaleTimeString()
+});
 
-);
+const co2=parseInt(document.getElementById("co2Value").innerHTML);
+
+const nh3=parseInt(document.getElementById("nh3Value").innerHTML);
+
+trendChart.data.labels.push(time);
 
 trendChart.data.datasets[0].data.push(co2);
 
 trendChart.data.datasets[1].data.push(nh3);
 
-if(trendChart.data.labels.length>10){
+if(trendChart.data.labels.length>12){
 
 trendChart.data.labels.shift();
 
@@ -608,13 +637,13 @@ trendChart.update();
 
 }
 
-setInterval(updateChart,3000);
+setInterval(updateLiveChart,3000);
 
-/*==================================
-GAUGE CHARTS
-==================================*/
+/* ================================
+GAUGES
+================================ */
 
-function createGauge(id,label,color,value){
+function gauge(id,color,value){
 
 return new Chart(
 
@@ -626,13 +655,13 @@ type:"doughnut",
 
 data:{
 
-labels:[label,"Remaining"],
+labels:["Value","Remaining"],
 
 datasets:[{
 
 data:[value,100-value],
 
-backgroundColor:[color,"#EAEFF5"],
+backgroundColor:[color,"#E5E7EB"],
 
 borderWidth:0
 
@@ -642,11 +671,13 @@ borderWidth:0
 
 options:{
 
-cutout:"75%",
+cutout:"78%",
 
 plugins:{
 
-legend:{display:false}
+legend:{display:false},
+
+tooltip:{enabled:false}
 
 }
 
@@ -658,97 +689,35 @@ legend:{display:false}
 
 }
 
-const co2Gauge=createGauge(
+const co2Gauge=gauge("co2Gauge","#00B050",60);
 
-"co2Gauge",
+const nh3Gauge=gauge("nh3Gauge","#F39C12",25);
 
-"CO₂",
+const h2sGauge=gauge("h2sGauge","#E74C3C",15);
 
-"#2ECC71",
+const aqiGauge=gauge("aqiGauge","#1565C0",92);
 
-62
-
-);
-
-const nh3Gauge=createGauge(
-
-"nh3Gauge",
-
-"NH₃",
-
-"#F39C12",
-
-40
-
-);
-
-const h2sGauge=createGauge(
-
-"h2sGauge",
-
-"H₂S",
-
-"#E74C3C",
-
-18
-
-);
-
-const aqiGauge=createGauge(
-
-"aqiGauge",
-
-"AQI",
-
-"#1565C0",
-
-85
-
-);
-
-/*==================================
+/* ================================
 UPDATE GAUGES
-==================================*/
+================================ */
 
-function updateGauges(){
+function updateGaugeValues(){
 
-let co2=parseInt(document.getElementById("co2Value").innerHTML);
+const co2=parseInt(document.getElementById("co2Value").innerHTML);
 
-let nh3=parseInt(document.getElementById("nh3Value").innerHTML);
+const nh3=parseInt(document.getElementById("nh3Value").innerHTML);
 
-let h2s=parseInt(document.getElementById("h2sValue").innerHTML);
+const h2s=parseInt(document.getElementById("h2sValue").innerHTML);
 
-co2Gauge.data.datasets[0].data=[
+let health=parseInt(document.getElementById("healthScore").innerHTML);
 
-Math.min(co2/15,100),
+co2Gauge.data.datasets[0].data=[Math.min(co2/15,100),100-Math.min(co2/15,100)];
 
-100-Math.min(co2/15,100)
+nh3Gauge.data.datasets[0].data=[Math.min(nh3*2,100),100-Math.min(nh3*2,100)];
 
-];
+h2sGauge.data.datasets[0].data=[Math.min(h2s*8,100),100-Math.min(h2s*8,100)];
 
-nh3Gauge.data.datasets[0].data=[
-
-Math.min(nh3*2,100),
-
-100-Math.min(nh3*2,100)
-
-];
-
-h2sGauge.data.datasets[0].data=[
-
-Math.min(h2s*8,100),
-
-100-Math.min(h2s*8,100)
-
-];
-
-aqiGauge.data.datasets[0].data=[
-
-parseInt(document.getElementById("healthScore").innerHTML),
-
-100-parseInt(document.getElementById("healthScore").innerHTML)
-
-];
+aqiGauge.data.datasets[0].data=[health,100-health];
 
 co2Gauge.update();
 
@@ -760,79 +729,45 @@ aqiGauge.update();
 
 }
 
-setInterval(updateGauges,2500);
+setInterval(updateGaugeValues,2500);
 
-/*==================================
-SMS ENGINE
-==================================*/
+/* ================================
+SMS UPDATE
+================================ */
 
 function updateSMS(){
 
-let status=document.getElementById("predictionValue").innerHTML;
-
-let facility=document.getElementById("facilityName").value;
-
-let message=
+document.getElementById("smsMessage").value=
 
 `KatrU Lite ALERT
 
-Facility : ${facility}
+Facility : ${document.getElementById("facilityName").value}
 
-Status : ${status}
+Status : ${document.getElementById("predictionValue").innerHTML}
 
 CO₂ : ${document.getElementById("co2Value").innerHTML} ppm
 
 NH₃ : ${document.getElementById("nh3Value").innerHTML} ppm
 
-Generated :
+H₂S : ${document.getElementById("h2sValue").innerHTML} ppm
 
-${new Date().toLocaleTimeString()}`;
+Health Score : ${document.getElementById("healthScore").innerHTML}
 
-document.getElementById("smsMessage").value=message;
+Generated : ${new Date().toLocaleTimeString()}`;
 
 }
 
 setInterval(updateSMS,3000);
 
-/*==================================
-COPY SMS
-==================================*/
-
-document.getElementById("copySMS").onclick=function(){
-
-navigator.clipboard.writeText(
-
-document.getElementById("smsMessage").value
-
-);
-
-alert("SMS copied.");
-
-};
-
-/*==================================
-PREVIEW SMS
-==================================*/
-
-document.getElementById("previewSMS").onclick=function(){
-
-alert(
-
-document.getElementById("smsMessage").value
-
-);
-
-};
-
-/*==================================
+/* ================================
 ALERT HISTORY
-==================================*/
+================================ */
 
 function addAlert(){
 
 const table=document.getElementById("alertHistory");
 
-const row=document.createElement("tr");
+const row=table.insertRow(0);
 
 row.innerHTML=`
 
@@ -844,36 +779,49 @@ row.innerHTML=`
 
 <td>${document.getElementById("co2Value").innerHTML} ppm</td>
 
-<td>
+<td><span class="warning-badge">Updated</span></td>
 
-<span class="warning-badge">
-
-Warning
-
-</span>
-
-</td>
-
-<td>
-
-AI monitoring updated.
-
-</td>
+<td>AI analysis completed</td>
 
 `;
 
-table.prepend(row);
+if(table.rows.length>10){
 
-if(table.rows.length>8){
-
-table.deleteRow(8);
+table.deleteRow(10);
 
 }
 
 }
 
 setInterval(addAlert,15000);
-```
+
+/* ================================
+COPY SMS
+================================ */
+
+document.getElementById("copySMS").onclick=function(){
+
+navigator.clipboard.writeText(
+
+document.getElementById("smsMessage").value
+
+);
+
+alert("SMS copied successfully.");
+
+};
+
+/* ================================
+SMS PREVIEW
+================================ */
+
+document.getElementById("previewSMS").onclick=function(){
+
+alert(document.getElementById("smsMessage").value);
+
+};
+
+console.log("Charts Loaded Successfully");
 /*==================================================
 SCRIPT.JS PART 4
 Reports
